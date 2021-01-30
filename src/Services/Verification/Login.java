@@ -46,15 +46,20 @@ public class Login {
 		if (err.isEmpty()) {
 			Student std = this.daoStudentImp.find(CNE);
 
-			student.setFullName(std.getFullName());
+			/*student.setFullName(std.getFullName());
 			student.setFacebook(std.getFacebook());
 			student.setInstagram(std.getInstagram());
+			student.setLevel(std.getLevel());
+			student.setMajor(std.getMajor());*/
 			
 			// I need decrept the std password and compare it with student.password
 			if (std != null) {
 				try {
 					if (!std.getCNE().equals(CNE) || !Hashing.validatePassword(password, std.getPassword()))
 						err.put("errLogin", "Login has failed");
+					else {
+						return std;
+					}
 				} catch (NoSuchAlgorithmException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

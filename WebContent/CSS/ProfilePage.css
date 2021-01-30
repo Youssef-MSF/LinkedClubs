@@ -10,7 +10,6 @@ body {
   height: 300px;
   position: relative;
   top: 60px;
-  background-image: url("../Images/kitchen.jpg");
   background-size: 100% 100%;
 }
 #personal__info main {

@@ -17,16 +17,16 @@
     <c:import url="navbar.jsp" />
     <!----------------Personnal info sections--------------------->
     <!----------------Personnal info sections--------------------->
-    <section id="personal__info">
+    <section id="personal__info" style="background-image: url('/LinkedClubs/Images/coverImages/<c:out value="${sessionScope.student.coverImage}"/>')">
         <main>
-            <img src="/LinkedClubs/Images/profileImage.jpg" alt="profile picture">
+            <img src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.student.profileImage}"/>" alt="profile picture">
             <div>
                 <ul>
                     <li><c:out value="${sessionScope.student.fullName}"/></li>
                     <li><i class="fab fa-facebook"></i><span><c:out value="${sessionScope.student.facebook}"/></span></li>
                     <li><i class="fab fa-instagram"></i><span><c:out value="${sessionScope.student.instagram}"/></span></li>
                 </ul>
-                <span>Clubs<span id="nbrClubsJoined" style="color: #FF7556;">68</span><button><i class="fas fa-cog"></i></button></span>                
+                <span>Clubs<span id="nbrClubsJoined" style="color: #FF7556;">68</span><button><a href="/LinkedClubs/StudentSetting" style="color: initial;"><i class="fas fa-cog"></i></a></button></span>                
             </div>
         </main>
     </section>
