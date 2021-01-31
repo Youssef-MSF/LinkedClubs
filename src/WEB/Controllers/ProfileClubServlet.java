@@ -2,8 +2,6 @@ package WEB.Controllers;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -17,13 +15,12 @@ import DAO.DaoJoinClub;
 import DAO.DaoJoinClubImp;
 import DAO.DaoPost;
 import DAO.DaoPostImp;
-import DAO.DaoStudent;
-import DAO.DaoStudentImp;
 import Services.Entities.Club;
 import Services.Entities.ClubsMembers;
 import Services.Entities.Post;
-import Services.Entities.Student;
 import Services.Verification.PostVerification;
+import WEB.Models.MembersOfClub;
+import WEB.Models.PostsOfClub;
 
 /**
  * Servlet implementation class ProfileClubServlet
@@ -57,19 +54,24 @@ public class ProfileClubServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		
 		HttpSession session = request.getSession();
 		String clubId = ((Club) session.getAttribute("club")).getClubId();
 		
 		ArrayList<ClubsMembers> membersCNE = this.daoJoinClubImp.readMembers(clubId);
 		
-		ArrayList<Student> members = this.daoJoinClubImp.getMembers(membersCNE);
+		MembersOfClub membersOfClub = new MembersOfClub();
 		
-		ArrayList<Post> posts = this.daoPostImp.getPosts(clubId);
+		PostsOfClub postsOfClub = new PostsOfClub();
+
 		
-		request.setAttribute("members", members);
+		membersOfClub.setMember(this.daoJoinClubImp.getMembers(membersCNE));
+		postsOfClub.setPostsOfClub(this.daoPostImp.getPosts(clubId));
+		
+		request.setAttribute("members", membersOfClub.getMember());
 		request.setAttribute("membersCNE", membersCNE);
-		request.setAttribute("posts", posts);
+		request.setAttribute("posts", postsOfClub.getPostsOfClub());
 		
 		request.getServletContext().getRequestDispatcher("/WEB-INF/JSP/ProfileClub.jsp").forward(request, response);
 		// TODO Auto-generated method stub

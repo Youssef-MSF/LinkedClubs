@@ -55,6 +55,43 @@ public class DaoJoinClubImp implements DaoJoinClub {
 		
 		return members;
 	}
+
+	@Override
+	public ArrayList<ClubsMembers> readClubs(String CNE) {
+		Session session=HibernateUtil.openSession();
+		session.beginTransaction();
+		try {
+			@SuppressWarnings("unchecked")
+			ArrayList<ClubsMembers> getAllClubsAndMembers = (ArrayList<ClubsMembers>) session.createSQLQuery("SELECT * FROM clubsmembers WHERE CNE='" + CNE + "'").addEntity(ClubsMembers.class).list();
+			session.getTransaction().commit();
+			
+			System.out.println(getAllClubsAndMembers.get(0).getCNE());
+			
+			return getAllClubsAndMembers;
+			
+		}catch(Exception e) {
+			session.getTransaction().rollback();
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	@Override
+	public ArrayList<Club> getClubs(ArrayList<ClubsMembers> clubIds) {
+		// TODO Auto-generated method stub
+		
+				DaoClub daoClubImp = new DaoClubImp();
+				
+				ArrayList<Club> clubs = new ArrayList<Club>();
+				
+				for (ClubsMembers clubsMembers : clubIds) {
+					System.out.println("tttttttttttt --> " + clubsMembers.getCNE());
+					clubs.add(daoClubImp.find(clubsMembers.getCNE()));
+				}
+				
+				return clubs;
+	}
 	
 
 }

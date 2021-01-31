@@ -1,6 +1,9 @@
 package Services.Entities;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -15,6 +18,8 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", updatable = false, nullable = false)
 	private int id;
+	
+
 	private String fileLink;
 	private String fileType;
 	private Date publishedDate;
@@ -28,11 +33,11 @@ public class Post {
 		// TODO Auto-generated constructor stub
 	}
 
-
-	public Post(Club club, String fileLink, String fileType, Date publishedDate, String postDescription,
-			int likeNumber, int commentNumber) {
+	public Post(Club club, int id, String fileLink, String fileType, Date publishedDate,
+			String postDescription, int likeNumber, int commentNumber) {
 		super();
 		this.club = club;
+		this.id = id;
 		this.fileLink = fileLink;
 		this.fileType = fileType;
 		this.publishedDate = publishedDate;
@@ -41,12 +46,15 @@ public class Post {
 		this.commentNumber = commentNumber;
 	}
 
-
-
 	public int getId() {
 		return id;
 	}
 	
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
 	public String getFileLink() {
 		return fileLink;
 	}
@@ -102,7 +110,6 @@ public class Post {
 	public void setClub(Club club) {
 		this.club = club;
 	}
-	
 	
 	
 

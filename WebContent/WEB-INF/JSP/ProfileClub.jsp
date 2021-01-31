@@ -69,7 +69,7 @@
 		<div class="nav__container">
 			<ul>
 				<li><button onclick="wow();">Club</button></li>
-				<li><button onclick="show();">Members </button></li>
+				<li><button onclick="show();">Members</button></li>
 				<li><button onclick="how();">About</button></li>
 				<li><button onclick="dow();">Setting</button></li>
 			</ul>
@@ -197,6 +197,21 @@
 
 			</div>
 
+			<div id="update-post-container" class="hide-post-update">
+
+				<form action="UpdatePost" method="post" enctype="multipart/form-data">
+					
+					<img src="" width="100px" height="100px" id="post-image"><br>
+					
+					<input type="text" name="description" id="description" placeholder="Description"><br>
+					<input type="text" name="post_id" id="post-id" value="" >
+					<input type="file" name="fileLink" id="file_input"><br> <input
+						type="submit" value="Update">
+
+				</form>
+
+			</div>
+
 			<c:forEach items="${posts}" var="post" varStatus="status">
 
 				<div class="post event">
@@ -205,19 +220,26 @@
 							<img
 								src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.club.image}"/>"
 								alt="profile image"> <span>
-								<li><c:out value="${sessionScope.club.clubName}"/></li>
+								<li><c:out value="${sessionScope.club.clubName}" /></li>
 								<li>${ post.publishedDate }</li>
 							</span>
 						</div>
 
 						<div>
-							<li><button><i class="fas fa-cog" style="font-size: 20px;"></i></button></li>
+							<li><button>
+									<i class="fas fa-cog" style="font-size: 20px;"
+										class="toggle-btn-update-post" onclick="toggle_update_post(${ status.index })">${ status.index }</i>
+								</button></li>
 							<li name="numberLikes">${ post.likeNumber }</li>
+							
 							<li><i class="fas fa-star"></i></li>
 						</div>
+						
+						<input type="text" value="${ post.id }" class="current_post_id" hidden >
+						
 					</header>
-					<p>${ post.postDescription }</p>
-					<img
+					<p class="current_post_decription">${ post.postDescription }</p>
+					<img class="current_post_image"
 						src="/LinkedClubs/Images/postFiles/<c:out value="${post.fileLink}"/>"
 						alt="picture">
 					<header class="likes__comments">
@@ -270,6 +292,7 @@
 				</div>
 
 			</c:forEach>
+
 
 			<!---------------------Normal post without picture----------->
 			<div class="post event">
@@ -466,15 +489,17 @@
 	</div>
 
 
-	<!--------------------Aboyt Club-------------------------------->
+	<!--------------------About Club-------------------------------->
 	<div id="About__container" style="display: none;">
 
 
 		<form action="">
 			<div class="form_container">
-				<div class="left_cantainer" id="left_cantainer">
+				<div class="left__cantainer" id="left__cantainer">
 
-					<img src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.club.image}"/>" alt="">
+					<img
+						src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.club.image}"/>"
+						alt="">
 
 				</div>
 				<div class="general_info" id="general_info">
@@ -512,5 +537,46 @@
 
 	<script src="/LinkedClubs/JS/ProfileClub1.js"></script>
 	<script src="/LinkedClubs/JS/ProfileClub2.js"></script>
+
+
+	<script>
+	
+		// Toggle post container
+		var update_post_container = document
+				.getElementById('update-post-container');
+		
+		// Get list of information
+		var post_ids = document.getElementsByClassName('current_post_id');
+		
+		var post_descriptions = document.getElementsByClassName('current_post_decription');
+		
+		var post_images = document.getElementsByClassName('current_post_image');
+		
+		// Get Inputs of update form
+		var input_id = document.getElementById('post-id');
+		
+		var input_description = document.getElementById('description');
+		
+		var input_image = document.getElementById('post-image');
+		
+		var input_file = document.getElementById('file_input');
+
+		// Toggle function
+		function toggle_update_post(index) {
+			
+			console.log(typeof index);
+			
+			update_post_container.classList.toggle("hide-post-update");
+			
+			input_id.value = post_ids[index].value ;
+			input_description.value = post_descriptions[index].textContent;
+			input_image.src = post_images[index].src ;
+			
+			input_file.value = post_images[index].src ;
+			
+		}
+	</script>
+
+
 </body>
 </html>
