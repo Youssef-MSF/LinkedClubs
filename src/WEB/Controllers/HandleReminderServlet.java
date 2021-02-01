@@ -8,28 +8,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.DaoComment;
-import DAO.DaoCommentImp;
-import DAO.DaoPost;
-import DAO.DaoPostImp;
+import DAO.DaoReminder;
+import DAO.DaoReminderImp;
 import Services.Entities.Comment;
-import Services.Entities.Post;
+import Services.Entities.Reminder;
 import Services.Verification.CommentVerification;
-import Services.Verification.PostVerification;
+import Services.Verification.ReminderVerification;
 
 /**
- * Servlet implementation class HandleCommentsServlet
+ * Servlet implementation class HandleReminderServlet
  */
-@WebServlet("/HandleComments")
-public class HandleCommentsServlet extends HttpServlet {
+@WebServlet("/HandleReminder")
+public class HandleReminderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private DaoComment daoCommentImp;
+	private DaoReminder daoReminderImp;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HandleCommentsServlet() {
+    public HandleReminderServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,8 +36,7 @@ public class HandleCommentsServlet extends HttpServlet {
 	 */
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
-		
-		this.daoCommentImp=new DaoCommentImp();
+		this.daoReminderImp = new DaoReminderImp();
 	}
 
 	/**
@@ -49,11 +45,11 @@ public class HandleCommentsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		CommentVerification commentVerification=new CommentVerification(this.daoCommentImp);
-		Comment comment=commentVerification.verifyComment(request);
-		System.out.println("comment: "+(String) request.getParameter("comment"));
+		ReminderVerification reminderVerification=new ReminderVerification(this.daoReminderImp);
+		Reminder reminder = reminderVerification.verifyReminder(request);
+		System.out.println("reminder: "+(String) request.getParameter("date"));
 		
-		if(commentVerification.getErr().isEmpty()) {
+		if(reminderVerification.getErr().isEmpty()) {
 			response.setContentType("text/xml");
 	        response.setHeader("Cache-Control", "no-cache");
 	        response.getWriter().write("<message>success</message>");

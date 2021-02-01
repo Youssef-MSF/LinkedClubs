@@ -3,6 +3,7 @@ package DAO;
 import java.util.ArrayList;
 
 import Services.Entities.Post;
+import Services.Entities.Student;
 import Services.Verification.PostVerification;
 
 public interface DaoPost {
@@ -10,4 +11,5 @@ public interface DaoPost {
 	public ArrayList<Post> getPosts(String clubId);
 	public Post update(Post post);
 	public Post find(int id);
+	public Post likePost(Post post, Student student);
 }

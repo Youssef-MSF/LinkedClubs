@@ -34,9 +34,9 @@ public class CommentVerification {
 	public Comment verifyComment(HttpServletRequest request) {
 		
 		// Getting parametters
-		String commentContent = request.getParameter("commentInput");
+		String commentContent = request.getParameter("comment");
 		Date commentDate = new Date();
-		int post_id = Integer.parseInt(request.getParameter("post_id"));
+		int post_id = Integer.parseInt(request.getParameter("postId"));
 		
 		this.daoPostImp = new DaoPostImp();
 		Post post = this.daoPostImp.find(post_id);
@@ -51,7 +51,9 @@ public class CommentVerification {
 		comment.setPost(post);
 		comment.setStudent(student);
 		
-		this.daoCommentImp.add(comment);
+		if (this.err.isEmpty()) {
+			this.daoCommentImp.add(comment);
+		}
 		
 		return comment;
 	}

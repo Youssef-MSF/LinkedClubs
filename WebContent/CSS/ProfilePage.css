@@ -291,6 +291,28 @@ body {
   text-align: right;
 }
 
+/*ADD reminder***/
+.addReminder{
+	padding:5px;
+	padding-bottom:10px;
+	border-style:groove;
+	border-width:0px;
+	border-bottom-width:0.5px;
+}
+.addReminder input{
+	outline:none;
+	width:100%;
+	border:none;
+	padding:10px 0px;
+	font-size:14px;
+	transition-duration:300ms;
+	
+}
+.addReminder input:nth-of-type(3):hover{
+	background-color:orange;
+	color:snow;
+}
+
 /*******Media queries*********/
 @media screen and (max-width: 860px) {
   #personal__info main {

@@ -1,9 +1,6 @@
 package Services.Entities;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
 
 import javax.persistence.*;
 
@@ -18,7 +15,6 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", updatable = false, nullable = false)
 	private int id;
-	
 
 	private String fileLink;
 	private String fileType;

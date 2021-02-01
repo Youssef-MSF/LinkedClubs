@@ -8,12 +8,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DAO.DaoPost;
+import DAO.DaoPostImp;
+import DAO.DaoPostStudent;
+import DAO.DaoPostStudentImp;
+import Services.Entities.Post;
+import Services.Entities.PostStudent;
+import Services.Verification.LikePostVerification;
+
 /**
  * Servlet implementation class HandleLikesServlet
  */
 @WebServlet("/HandleLikes")
 public class HandleLikesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private DaoPostStudent daoPostStudentImp;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -28,6 +37,7 @@ public class HandleLikesServlet extends HttpServlet {
 	 */
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
+		this.daoPostStudentImp = new DaoPostStudentImp();
 	}
 
 	/**
@@ -36,14 +46,26 @@ public class HandleLikesServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		LikePostVerification likePostVerify = new LikePostVerification(this.daoPostStudentImp);
+        PostStudent postStudent = likePostVerify.verifyLikePost(request);
+		
 		System.out.println("kjskjqgsfjkgqsjfgq");
 		int id= Integer.parseInt(request.getParameter("id"));
-		boolean isClicked= Boolean.parseBoolean(request.getParameter("isClicked"));
-		System.out.println("id "+id);
-		System.out.println("isClicked "+isClicked);
-		response.setContentType("text/xml");
-        response.setHeader("Cache-Control", "no-cache");
-        response.getWriter().write("<message>success</message>");
+		boolean isClicked= Boolean.parseBoolean(request.getParameter("isLiked"));
+		if (isClicked) {
+			System.out.println("id "+id);
+			System.out.println("isClicked "+isClicked);
+			response.setContentType("text/xml");
+	        response.setHeader("Cache-Control", "no-cache");
+	        response.getWriter().write("<message>failure</message>");
+		}else {
+			System.out.println("id "+id);
+			System.out.println("isClicked "+isClicked);
+			response.setContentType("text/xml");
+	        response.setHeader("Cache-Control", "no-cache");
+	        response.getWriter().write("<message>success</message>");
+		}
+        
 		
 	}
 

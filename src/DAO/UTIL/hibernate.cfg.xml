@@ -28,6 +28,8 @@
 		<mapping class="Services.Entities.Club"/>
 		<mapping class="Services.Entities.Comment"/>
 		<mapping class="Services.Entities.Post"/>
+		<mapping class="Services.Entities.PostStudent"/>
+		<mapping class="Services.Entities.Reminder"/>
 		
 		
         

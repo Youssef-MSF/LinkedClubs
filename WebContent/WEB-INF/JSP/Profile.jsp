@@ -50,36 +50,20 @@
 				<span style="color: #FF7556; font-size: 1.5em">Reminder</span> <span
 					style="text-align: right;"><i class="fas fa-sticky-note"></i></span>
 			</section>
-			<section>
-				<span>AppsClub web trainig</span> <span>8/9/2021 20:20 pm</span>
-			</section>
-			<section>
-				<span>Club social</span> <span>6/9/2021 21:20 pm</span>
-			</section>
-			<section>
-				<span>Club sportif</span> <span>6/9/2021 12:30 am</span>
-			</section>
-			<section>
-				<span>AppsClub JS</span> <span>9/9/2021 10:30 am</span>
-			</section>
-			<section>
-				<span>Club social</span> <span>6/9/2021 21:20 pm</span>
-			</section>
-			<section>
-				<span>Club sportif</span> <span>6/9/2021 12:30 am</span>
-			</section>
-			<section>
-				<span>AppsClub JS</span> <span>9/9/2021 10:30 am</span>
-			</section>
-			<section>
-				<span>Club social</span> <span>6/9/2021 21:20 pm</span>
-			</section>
-			<section>
-				<span>Club sportif</span> <span>6/9/2021 12:30 am</span>
-			</section>
-			<section>
-				<span>AppsClub JS</span> <span>9/9/2021 10:30 am</span>
-			</section>
+			
+			<div class="addReminder">
+				<input type="text" placeholder="Title of the reminder...">
+				<input type="date">
+				<input type="submit" name="addReminder" value="Add reminder">
+			</div>
+			
+			<c:forEach items="${reminders}" var="reminder" varStatus="status">
+
+				<section>
+					<span>${ reminder.title }</span> <span>${ reminder.reminderDate }</span>
+				</section>
+
+			</c:forEach>
 		</div>
 		<div id="posts">
 			<!---------------------Normal post with picture----------->
@@ -106,9 +90,12 @@
 					<header class="likes__comments">
 						<div>
 
-								<button name="likesBtn" data-isLiked="false" data-id="1" >
-									<i class="fas fa-star"></i> like
-								</button>
+							<button name="likesBtn"
+								data-isLiked="${ likedPosts.contains(post.id) }"
+								<c:if test="${ likedPosts.contains(post.id) }">style="color:#FF7556;"</c:if>
+								data-id="${ post.id }">
+								<i class="fas fa-star"></i> like
+							</button>
 
 							<button name="commentsBtn">
 								<i class="fas fa-comment-alt"></i> comment
@@ -121,33 +108,27 @@
 					</header>
 					<section class="comments">
 						<main>
-							<div>
-								<img src="/LinkedClubs/Images/profileImage.jpg"
-									alt="profile picture"> <span>wowo that's
-									uncridable !!</span>
-							</div>
-							<div>
-								<img src="/LinkedClubs/Images/profileImage.jpg"
-									alt="profile picture"> <span>that's amazing keep
-									going !!</span>
-							</div>
-							<div>
-								<img src="/LinkedClubs/Images/profileImage.jpg"
-									alt="profile picture"> <span>wowo that's
-									uncridable!!</span>
-							</div>
-							<div>
-								<img src="/LinkedClubs/Images/profileImage.jpg"
-									alt="profile picture"> <span>wowo that's
-									uncridable!!</span>
-							</div>
+
+							<c:forEach items="${allComments}" var="comment">
+
+								<c:if test="${ comment.post.id == post.id }">
+
+									<div>
+										<img
+											src="/LinkedClubs/Images/profileImages/<c:out value="${comment.student.profileImage}"/>"
+											alt="profile picture"> <span>${ comment.content }</span>
+									</div>
+
+								</c:if>
+
+							</c:forEach>
 						</main>
-						<form action="profile" method="post">
-							<input type="text" value="${ post.id }" name="post_id" hidden >
-							<button name="publishBtn">Publish</button>
+						<form action="" method="post" onsubmit="return false;">
+							<button name="publishBtn" data-id="${ post.id }"
+								data-img="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.student.profileImage}"/>">Publish</button>
 							<input type="text" name="commentInput"
-								placeholder="Write a comment...">
-								<span style="color: red;">${err.get("errCommentContent")}</span>
+								placeholder="Write a comment..."> <span
+								style="color: red;">${err.get("errCommentContent")}</span>
 						</form>
 					</section>
 				</div>
@@ -315,36 +296,21 @@
 					style="text-align: right;"><i id="closeNotificationBtn"
 					class="fas fa-times"></i></span>
 			</section>
-			<section>
-				<span>AppsClub web </span> <span>8/9/2021 20:20 pm</span>
-			</section>
-			<section>
-				<span>Club social</span> <span>6/9/2021 21:20 pm</span>
-			</section>
-			<section>
-				<span>Club sportif</span> <span>6/9/2021 12:30 am</span>
-			</section>
-			<section>
-				<span>AppsClub JS</span> <span>9/9/2021 10:30 am</span>
-			</section>
-			<section>
-				<span>Club social</span> <span>6/9/2021 21:20 pm</span>
-			</section>
-			<section>
-				<span>Club sportif</span> <span>6/9/2021 12:30 am</span>
-			</section>
-			<section>
-				<span>AppsClub JS</span> <span>9/9/2021 10:30 am</span>
-			</section>
-			<section>
-				<span>Club social</span> <span>6/9/2021 21:20 pm</span>
-			</section>
-			<section>
-				<span>Club sportif</span> <span>6/9/2021 12:30 am</span>
-			</section>
-			<section>
-				<span>AppsClub JS</span> <span>9/9/2021 10:30 am</span>
-			</section>
+			
+			<div class="addReminder">
+				<input type="text" placeholder="Title of the reminder...">
+				<input type="date">
+				<input type="submit" name="addReminder" value="Add reminder">
+			</div>
+			
+			<c:forEach items="${reminders}" var="reminder" varStatus="status">
+
+				<section>
+					<span>${ reminder.title }</span> <span>${ reminder.reminderDate }</span>
+				</section>
+
+			</c:forEach>
+			
 		</div>
 	</div>
 	<script src="/LinkedClubs/JS/ProfilePage.js"></script>

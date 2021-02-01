@@ -6,39 +6,40 @@ import org.hibernate.Session;
 
 import DAO.UTIL.HibernateUtil;
 import Services.Entities.Comment;
-import Services.Entities.PostStudent;
+import Services.Entities.Reminder;
 
-public class DaoCommentImp implements DaoComment {
+public class DaoReminderImp implements DaoReminder {
 
-	public DaoCommentImp() {
+	public DaoReminderImp() {
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public Comment add(Comment comment) {
+	public Reminder add(Reminder reminder) {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.openSession();
 		try {
 			session.beginTransaction();
-			session.save(comment);
+			session.save(reminder);
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			session.getTransaction().rollback();
 			// TODO: handle exception
 		}
-		return comment;
+		return reminder;
 	}
 
 	@Override
-	public ArrayList<Comment> getAllComments() {
+	public ArrayList<Reminder> getStudentReminder(String studentCNE) {
+		
 		Session session=HibernateUtil.openSession();
 		session.beginTransaction();
 		try {
 			@SuppressWarnings("unchecked")
-			ArrayList<Comment> getAllComments = (ArrayList<Comment>) session.createSQLQuery("SELECT * FROM comment").addEntity(Comment.class).list();
+			ArrayList<Reminder> reminders = (ArrayList<Reminder>) session.createSQLQuery("SELECT * FROM reminder ORDER BY reminderDate DESC").addEntity(Reminder.class).list();
 			session.getTransaction().commit();
 			
-			return getAllComments;
+			return reminders;
 			
 		}catch(Exception e) {
 			session.getTransaction().rollback();

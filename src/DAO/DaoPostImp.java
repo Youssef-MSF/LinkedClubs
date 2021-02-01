@@ -2,6 +2,8 @@ package DAO;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.hibernate.Session;
 
 import DAO.UTIL.HibernateUtil;
@@ -55,10 +57,10 @@ public class DaoPostImp implements DaoPost{
 			session.beginTransaction();
 			Post pst=find(post.getId());
 			pst.setPostDescription(post.getPostDescription());
-			pst.setFileType(post.getFileType());
 			
 			if(!post.getFileLink().isEmpty()) {
 				pst.setFileLink(post.getFileLink());
+				pst.setFileType(post.getFileType());
 			}else {
 				
 			}
@@ -90,6 +92,29 @@ public class DaoPostImp implements DaoPost{
 		}
 		
 		return null;
+	}
+
+	@Override
+	public Post likePost(Post post, Student student) {
+		/*Session session=HibernateUtil.openSession();
+		try {
+			session.beginTransaction();
+			Post pst=session.get(Post.class, post.getId());
+			pst.setLikeNumber(pst.getLikeNumber() + 1);
+			
+			session.update(pst);
+			
+			//System.out.println("Daaaamn--------- : " + pst.getPostDescription());
+			session.getTransaction().commit();	
+			
+			return pst;
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Daaaamn--------- : " + post.getPostDescription());
+			session.getTransaction().rollback();
+		}
+		// TODO Auto-generated method stub*/
+		return post;
 	}
 
 }
