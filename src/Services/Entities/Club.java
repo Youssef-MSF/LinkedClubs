@@ -13,6 +13,7 @@ public class Club {
 	private String clubName;
 	private String password;
 	private String image;
+	private String coverImage;
 	private int membersNumber;
 	private String clubBio;
 	private String facebook;
@@ -21,22 +22,20 @@ public class Club {
 	// Constructors
 
 	public Club() {}
-	
-	
-	public Club(String clubId, String clubName, String password, String image, int membersNumber, String clubBio,
-			String facebook, String instagram) {
+
+	public Club(String clubId, String clubName, String password, String image, String coverImage, int membersNumber,
+			String clubBio, String facebook, String instagram) {
 		super();
 		this.clubId = clubId;
 		this.clubName = clubName;
 		this.password = password;
 		this.image = image;
+		this.coverImage = coverImage;
 		this.membersNumber = membersNumber;
 		this.clubBio = clubBio;
 		this.facebook = facebook;
 		this.instagram = instagram;
 	}
-
-
 
 	// Getters and Setters
 
@@ -102,6 +101,16 @@ public class Club {
 
 	public void setInstagram(String instagram) {
 		this.instagram = instagram;
+	}
+
+
+	public String getCoverImage() {
+		return coverImage;
+	}
+
+
+	public void setCoverImage(String coverImage) {
+		this.coverImage = coverImage;
 	}
 	
 	

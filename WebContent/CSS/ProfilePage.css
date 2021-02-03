@@ -88,7 +88,7 @@ body {
   background-color: snow;
   flex-grow: 0.28;
   max-width: 28%;
-  max-height: 400px;
+  max-height: 450px;
   border-style: groove;
   border-width: 0.5px;
   border-color: rgba(128, 128, 128, 0.13);
@@ -291,7 +291,44 @@ body {
   text-align: right;
 }
 
-/*ADD reminder***/
+/*************notification**********/
+#notification{
+	background-color:#efefef;
+	position:fixed;
+	z-index:2;
+	top:58px;
+	right:15%;
+	width:30%;
+	height:250px;
+	border-radius:5px;
+	box-shadow:1px 2px 10px black;
+	overflow-Y:scroll;
+	display:none;
+}
+#notification::-webkit-scrollbar{
+	width:2px;
+	background-color: snow;
+}
+#notification::-webkit-scrollbar-thumb {
+    background: #000;
+}
+#notification section{
+	display:flex;
+	justify-content:space-between;
+	padding:15px 0px;
+	margin:0px 10px;
+	border-style:groove;
+	border-width:0px;
+	border-bottom-width:0.5px;
+}
+#notification section span{
+	display:block;
+	width:45%;
+}
+#notification section span:nth-of-type(2){
+	text-align:right;
+}
+/****ADD reminder******/
 .addReminder{
 	padding:5px;
 	padding-bottom:10px;
@@ -313,12 +350,24 @@ body {
 	color:snow;
 }
 
+
+.reminderErr{
+	display:block;
+	width:100%;
+	display:none;
+	text-align:center;
+	padding:10px 0px;
+	color:red;
+}
 /*******Media queries*********/
 @media screen and (max-width: 860px) {
   #personal__info main {
     width: 80%;
   }
-
+	#notification{
+		right:5%;
+		width:65%;
+	}
   #posts__reminder {
     width: 80%;
     padding: 0px 10px;
@@ -337,7 +386,11 @@ body {
   body {
     font-size: 15px;
   }
-
+	#notification{
+		top:47px;
+		right:2%;
+		width:60%;
+	}
   #personal__info {
     top: 47px;
   }

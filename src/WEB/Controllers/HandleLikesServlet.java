@@ -23,6 +23,7 @@ import Services.Verification.LikePostVerification;
 public class HandleLikesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private DaoPostStudent daoPostStudentImp;
+	private DaoPost daoPostImp;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -38,6 +39,7 @@ public class HandleLikesServlet extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
 		this.daoPostStudentImp = new DaoPostStudentImp();
+		this.daoPostImp = new DaoPostImp();
 	}
 
 	/**
@@ -46,7 +48,7 @@ public class HandleLikesServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		LikePostVerification likePostVerify = new LikePostVerification(this.daoPostStudentImp);
+		LikePostVerification likePostVerify = new LikePostVerification(this.daoPostStudentImp, this.daoPostImp);
         PostStudent postStudent = likePostVerify.verifyLikePost(request);
 		
 		System.out.println("kjskjqgsfjkgqsjfgq");

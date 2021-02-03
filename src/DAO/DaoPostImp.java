@@ -95,26 +95,51 @@ public class DaoPostImp implements DaoPost{
 	}
 
 	@Override
-	public Post likePost(Post post, Student student) {
-		/*Session session=HibernateUtil.openSession();
+	public Post updateLikeNumber(Post post, Boolean isLiked) {
+		Session session=HibernateUtil.openSession();
 		try {
 			session.beginTransaction();
-			Post pst=session.get(Post.class, post.getId());
-			pst.setLikeNumber(pst.getLikeNumber() + 1);
+			Post pst=find(post.getId());
+			
+			if (!isLiked) {
+				pst.setLikeNumber(pst.getLikeNumber() + 1);
+			}else {
+				pst.setLikeNumber(pst.getLikeNumber() - 1);
+			}
 			
 			session.update(pst);
 			
-			//System.out.println("Daaaamn--------- : " + pst.getPostDescription());
 			session.getTransaction().commit();	
 			
 			return pst;
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("Daaaamn--------- : " + post.getPostDescription());
 			session.getTransaction().rollback();
 		}
-		// TODO Auto-generated method stub*/
+		// TODO Auto-generated method stub
 		return post;
 	}
 
+	@Override
+	public Post updateCommentNumber(Post post) {
+		Session session=HibernateUtil.openSession();
+		try {
+			session.beginTransaction();
+			Post pst=find(post.getId());
+			
+			pst.setCommentNumber(pst.getCommentNumber() + 1);
+			
+			session.update(pst);
+			
+			session.getTransaction().commit();	
+			
+			return pst;
+		} catch (Exception e) {
+			// TODO: handle exception
+			session.getTransaction().rollback();
+		}
+		// TODO Auto-generated method stub
+		return post;
+	}
+	
 }

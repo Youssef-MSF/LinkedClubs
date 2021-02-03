@@ -53,8 +53,9 @@
 			
 			<div class="addReminder">
 				<input type="text" placeholder="Title of the reminder...">
-				<input type="date">
+				<input type="datetime-local">
 				<input type="submit" name="addReminder" value="Add reminder">
+				<span class="reminderErr">Check out title and Date</span>
 			</div>
 			
 			<c:forEach items="${reminders}" var="reminder" varStatus="status">
@@ -72,7 +73,7 @@
 					<header>
 						<div>
 							<img
-								src="/LinkedClubs/Images/profileImages/<c:out value="${post.club.image}"/>"
+								src="/LinkedClubs/Images/clubProfileImages/<c:out value="${post.club.image}"/>"
 								alt="profile image"> <span>
 								<li>${ post.club.clubName }</li>
 								<li>${ post.publishedDate }</li>
@@ -222,7 +223,7 @@
 						<button name="commentsBtn">
 							<i class="fas fa-comment-alt"></i> comment
 						</button>
-						<button name="ticketBtn">
+						<button name="ticketBtn" data-clicked="false" data-title="" data-date="">
 							<i class="fas fa-scroll"></i> ticket
 						</button>
 					</div>
@@ -313,6 +314,26 @@
 			
 		</div>
 	</div>
+	
+	<!---------------Notification small devices------------------------->
+	<div id="notification">
+		<section>
+			<span>Club social</span> <span>6/9/2021 21:20</span>
+		</section>
+		<section>
+			<span>Club social</span> <span>6/9/2021 21:20</span>
+		</section>
+		<section>
+			<span>Club social</span> <span>6/9/2021 21:20</span>
+		</section>
+		<section>
+			<span>Club social</span> <span>6/9/2021 21:20</span>
+		</section>
+		<section>
+			<span>Club social</span> <span>6/9/2021 21:20</span>
+		</section>
+	</div>
+	
 	<script src="/LinkedClubs/JS/ProfilePage.js"></script>
 	<script src="/LinkedClubs/JS/AjaxCall.js"></script>
 </body>

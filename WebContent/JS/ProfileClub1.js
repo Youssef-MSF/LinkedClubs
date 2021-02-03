@@ -32,19 +32,28 @@ function show(){
   document.getElementById("grid__container").style.display="grid";
   document.getElementById("posts__reminder").style.display="none";
   document.getElementById("About__container").style.display="none";
+  document.getElementById("Club_sett").style.display="none";
 }
 function how(){
     document.getElementById("About__container").style.display="block";
     document.getElementById("posts__reminder").style.display="none";
     document.getElementById("grid__container").style.display="none";
-   // document.getElementById("reminder_contain_mobile").style.display="none";
+   document.getElementById("Club_sett").style.display="none";
   }
   function wow(){
     document.getElementById("About__container").style.display="none";
     document.getElementById("posts__reminder").style.display="flex";
     document.getElementById("grid__container").style.display="none";
-   // document.getElementById("reminder_contain_mobile").style.display="none";
+   document.getElementById("Club_sett").style.display="none";
   }
+  
+  function dow(){
+    document.getElementById("About__container").style.display="none";
+    document.getElementById("posts__reminder").style.display="none";
+    document.getElementById("grid__container").style.display="none";
+    document.getElementById("Club_sett").style.display="grid";
+  }
+  
 const realFileBtn = document.getElementById("real_file");
 const customBtn = document.getElementById("custom_button");
 const customTxt = document.getElementById("custom_text");

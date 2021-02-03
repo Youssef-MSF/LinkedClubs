@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +20,7 @@
             <ul class="px-10 md:py-6">
                 <li class="inline-block pr-3">
                     <a href="#">
-                        <img src="/LinkedClubs/Images/appsclub.jpeg"
+                        <img src="/LinkedClubs/Images/clubProfileImages/appsclub logo.jpg"
                             class="rounded-full transition transform duration-500 hover:rotate-180 w-10 h-10" />
                     </a>
                 </li>

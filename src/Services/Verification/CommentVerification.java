@@ -53,6 +53,7 @@ public class CommentVerification {
 		
 		if (this.err.isEmpty()) {
 			this.daoCommentImp.add(comment);
+			this.daoPostImp.updateCommentNumber(post);
 		}
 		
 		return comment;

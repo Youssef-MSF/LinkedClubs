@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import DAO.UTIL.HibernateUtil;
 import Services.Entities.Club;
 import Services.Entities.ClubsMembers;
+import Services.Entities.PostStudent;
 import Services.Entities.Student;
 
 public class DaoClubImp implements DaoClub {
@@ -15,36 +16,88 @@ public class DaoClubImp implements DaoClub {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
 	public Club add(Club club) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session=HibernateUtil.openSession();
+		try {
+			session.beginTransaction();
+			session.save(club);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			// TODO: handle exception
+		}
+		return club;
 	}
 
 	@Override
 	public Club find(String clubId) {
 		// TODO Auto-generated method stub
-		Session session=HibernateUtil.openSession();
+		Session session = HibernateUtil.openSession();
 		session.beginTransaction();
 		try {
-			Club club=session.get(Club.class, clubId);
+			Club club = session.get(Club.class, clubId);
 			session.getTransaction().commit();
 			return club;
-		}catch(Exception e) {
+		} catch (Exception e) {
 			session.getTransaction().rollback();
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
 
 	@Override
 	public Club update(Club club) {
 		// TODO Auto-generated method stub
-		return null;
+		Session session = HibernateUtil.openSession();
+		try {
+			session.beginTransaction();
+			Club clb = find(club.getClubId());
+			clb.setClubName(club.getClubName());
+			clb.setFacebook(club.getFacebook());
+			clb.setInstagram(club.getInstagram());
+			clb.setClubBio(club.getClubBio());
+			clb.setMembersNumber(club.getMembersNumber());
+			clb.setPassword(club.getPassword());
+
+			if (!club.getImage().isEmpty()) {
+				clb.setImage(club.getImage());
+			}
+			if (!club.getCoverImage().isEmpty()) {
+				clb.setCoverImage(club.getCoverImage());
+			}
+
+			session.update(clb);
+
+			session.getTransaction().commit();
+
+			return clb;
+		} catch (Exception e) {
+			// TODO: handle exception
+			session.getTransaction().rollback();
+		}
+		// TODO Auto-generated method stub
+		return club;
 	}
 
-	
-	
+	@Override
+	public ArrayList<Club> getAllClubs() {
+		Session session = HibernateUtil.openSession();
+		session.beginTransaction();
+		try {
+			@SuppressWarnings("unchecked")
+			ArrayList<Club> allClubs = (ArrayList<Club>) session.createSQLQuery("SELECT * FROM club")
+					.addEntity(Club.class).list();
+			session.getTransaction().commit();
+
+			return allClubs;
+
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			e.printStackTrace();
+		}
+
+		return null;
+	}
 
 }

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 
 import DAO.DaoPost;
+import DAO.DaoPostImp;
 import DAO.DaoPostStudent;
 import Services.Entities.Post;
 import Services.Entities.PostStudent;
@@ -14,11 +15,13 @@ import Services.Entities.Student;
 public class LikePostVerification {
 	//variables
 	private DaoPostStudent daoPostStudentImp;
+	private DaoPost daoPostImp;
 
 	//Constructor
 	public LikePostVerification() {}
-	public LikePostVerification(DaoPostStudent daoPostStudentImp) {
+	public LikePostVerification(DaoPostStudent daoPostStudentImp, DaoPost daoPostImp) {
 		this.daoPostStudentImp=daoPostStudentImp;
+		this.daoPostImp = daoPostImp;
 	}
 
 	public PostStudent verifyLikePost(HttpServletRequest request) {
@@ -30,6 +33,12 @@ public class LikePostVerification {
 		HttpSession session=request.getSession();
 		Student student=(Student) session.getAttribute("student");
 		String studentId=student.getCNE();
+		
+		// Get the current post
+		Post post = this.daoPostImp.find(postId);
+		
+		// Update like number
+		this.daoPostImp.updateLikeNumber(post, isLiked);
 		
 		PostStudent post_student=new PostStudent();
 		post_student.setPost_id(postId);

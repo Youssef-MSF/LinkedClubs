@@ -110,7 +110,6 @@ body {
 	height: 300px;
 	position: relative;
 	top: 60px;
-	background-image: url("../Images/kitchen.jpg");
 	background-size: 100% 100%;
 }
 
@@ -1169,6 +1168,215 @@ body {
 		/*padding: 5px;*/
 		transform: translate(90px, -40px);
 	}
+}
+
+#Club_sett{
+  margin-top: 180px;
+}
+h1 {
+  text-align: center;
+  margin-top: 5%;
+  font-family: 'Arial Narrow Bold', sans-serif;
+  color: rgb(243, 121, 65);
+  text-decoration: underline;
+}
+
+.form_container {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  width: 1000px;
+  padding: 8px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  height: 100%;
+  margin: 20px auto;
+  
+ 
+}
+
+.sett_info {
+  
+  padding: 5%;
+  background-color: rgb(236, 232, 232);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  height: auto;
+  padding-bottom: 0;
+}
+
+.signup_info {
+  height: auto;
+  
+  padding: 5%;
+  background-color: #FF7556;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+
+
+.signup_info input {
+  margin-bottom: 10%;
+  margin-top: 1%;
+  padding: 2%;
+  border: none;
+  border: 1px solid rgb(27, 26, 26);
+  background-color: #FF7556;
+  width: 100%;
+  color: white;
+  font-family: "consolas";
+  font-size: medium;
+}
+
+.signup_info input::placeholder {
+  color: white;
+}
+
+.sett_info input {
+  margin-bottom: 10%;
+  margin-top: 1%;
+  padding: 2%;
+  border: none;
+  color: black;
+  border: 1px solid rgb(27, 26, 26);
+  width: 100%;
+  font-family: "consolas";
+  font-size: medium;
+}
+
+
+
+
+.title {
+  color: #fff;
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1;
+  margin-bottom: 0.7rem;
+}
+
+.input-container {
+  position: relative;
+  margin: 1rem 0;
+}
+
+.input {
+  margin-bottom: 10%;
+  margin-top: 1%;
+  padding: 2%;
+  border: 1px solid rgb(27, 26, 26);
+  
+  color: white;
+  font-family: "consolas";
+  font-size: medium;
+  width: 100%;
+  outline: none;
+  border: 2px solid #1f1e1e;
+  background: none;
+  padding: 0.6rem 1.2rem;
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  border-radius: 25px;
+  transition: 0.3s;
+}
+
+textarea.input {
+  margin-top: 8px;
+  width: 80%;
+  padding: 0.8rem 1.2rem;
+  min-height: 126px;
+  border-radius: 22px;
+  resize: none;
+  overflow-y: auto;
+}
+
+.input-container label {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  padding: 0 0.4rem;
+  color: #fafafa;
+  font-size: 0.9rem;
+  font-weight: 400;
+  pointer-events: none;
+  z-index: 1000;
+  transition: 0.5s;
+}
+
+.input-container.textarea label {
+  top: 1rem;
+  transform: translateY(0);
+}
+
+.btn {
+  padding: 0.6rem 1.3rem;
+  background-color: #fff;
+  border: 2px solid #fafafa;
+  font-size: 0.95rem;
+  color: #1abc9c;
+  line-height: 1;
+  border-radius: 25px;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s;
+  margin: 0;
+}
+
+.btn:hover {
+  background-color: transparent;
+  color: #fff;
+}
+
+@media screen and (max-width: 800px) {
+
+  .form_container {
+ 
+    width: 600px;
+    
+    display: grid;
+    grid-template-columns: 1fr;
+    height: 100%;
+    margin: auto;
+   
+   
+  }
+}
+
+@media screen and (max-width: 580px) {
+
+  .form_container {
+ 
+    width: 380px;
+    
+    display: grid;
+    grid-template-columns: 1fr;
+    height: 100%;
+    margin: auto;
+   
+   
+  }
+  #Club_sett{
+    margin-top: 100px;
+  }
+}
+@media screen and (max-width: 405px) {
+
+  .form_container {
+ 
+    width: 300px;
+    
+    display: grid;
+    grid-template-columns: 1fr;
+    height: 100%;
+    margin: auto;
+   
+   
+  }
+  #Club_sett{
+    margin-top: 100px;
+  }
 }
 
 @media ( max-width : 275px) {

@@ -11,5 +11,6 @@ public interface DaoPost {
 	public ArrayList<Post> getPosts(String clubId);
 	public Post update(Post post);
 	public Post find(int id);
-	public Post likePost(Post post, Student student);
+	public Post updateLikeNumber(Post post, Boolean isLiked);
+	public Post updateCommentNumber(Post post);
 }

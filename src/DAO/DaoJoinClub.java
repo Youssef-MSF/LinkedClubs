@@ -14,5 +14,7 @@ public interface DaoJoinClub {
 	public ArrayList<ClubsMembers> readClubs(String CNE);
 	public ArrayList<Student> getMembers(ArrayList<ClubsMembers> membersCNE);
 	public ArrayList<Club> getClubs(ArrayList<ClubsMembers> clubIds);
+	public ClubsMembers delete(ClubsMembers clubsMembers);
+	public ClubsMembers update(ClubsMembers clubsMembers);
 
 }

@@ -1,4 +1,3 @@
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <nav id="navBar">
@@ -10,7 +9,7 @@
         </button>
         <div>
             <button id="notificationBtn"><i class="fas fa-sticky-note"></i></button><span>63</span>
-            <button><i class="fas fa-bell"></i></button><span>63</span>
+            <button id="notifyBtn"><i class="fas fa-bell"></i></button><span id="nbrNotificattion" >68</span>
             <img src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.student.profileImage}"/>" alt="profile picture">
             <span id="fullName"><c:out value="${sessionScope.student.fullName}"/></span>
         </div>
