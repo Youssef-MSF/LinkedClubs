@@ -30,6 +30,7 @@
 		<mapping class="Services.Entities.Post"/>
 		<mapping class="Services.Entities.PostStudent"/>
 		<mapping class="Services.Entities.Reminder"/>
+		<mapping class="Services.Entities.Notification"/>
 		
 		
         

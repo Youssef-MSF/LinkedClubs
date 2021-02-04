@@ -10,6 +10,7 @@ import Services.Entities.Student;
 
 public interface DaoJoinClub {
 	
+	public ClubsMembers add(ClubsMembers clubsMembers);
 	public ArrayList<ClubsMembers> readMembers(String clubId);
 	public ArrayList<ClubsMembers> readClubs(String CNE);
 	public ArrayList<Student> getMembers(ArrayList<ClubsMembers> membersCNE);

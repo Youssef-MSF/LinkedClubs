@@ -35,33 +35,34 @@
 					<i class="fas fa-bell"></i>
 				</button>
 				<span>63</span> <img
-					src="/LinkedClubs/Images/clubProfileImages/<c:out value="${sessionScope.club.image}"/>"
+					src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.student.image}"/>"
 					alt="profile picture"> <span id="fullName"><c:out
-						value="${sessionScope.club.clubName}" /></span>
+						value="${sessionScope.student.fullName}" /></span>
 			</div>
 		</main>
 	</nav>
 	<!----------------Personnal info sections--------------------->
 	<!----------------Personnal info sections--------------------->
 	<section id="personal__info"
-		style="background-image: url('/LinkedClubs/Images/clubCoverImages/<c:out value="${sessionScope.club.coverImage}"/>')">
+		style="background-image: url('/LinkedClubs/Images/clubCoverImages/<c:out value="${club.coverImage}"/>')">
 		<main>
 			<img
-				src="/LinkedClubs/Images/clubProfileImages/<c:out value="${sessionScope.club.image}"/>"
+				src="/LinkedClubs/Images/clubProfileImages/<c:out value="${club.image}"/>"
 				alt="profile picture">
 			<div>
 				<ul>
-					<li><c:out value="${sessionScope.club.clubName}" /></li>
+					<li><c:out value="${club.clubName}" /></li>
 					<li><i class="fab fa-facebook"></i><span><c:out
-								value="${sessionScope.club.facebook}" /></span></li>
+								value="${club.facebook}" /></span></li>
 					<li><i class="fab fa-instagram"></i><span><c:out
-								value="${sessionScope.club.instagram}" /></span></li>
+								value="${club.instagram}" /></span></li>
 					<li><i class="fab fa-twitter"></i><span><c:out
-								value="${sessionScope.club.clubBio}" /></span></li>
+								value="${club.clubBio}" /></span></li>
 				</ul>
+				<button id="joinBtn" data-clubId="${ club.clubId }">Join Club</button>
 				<span>Members<span id="nbrClubsJoined"
 					style="color: #FF7556;"><c:out
-							value="${sessionScope.club.membersNumber}" /></span></span>
+							value="${club.membersNumber}" /></span></span>
 			</div>
 		</main>
 	</section>
@@ -70,9 +71,7 @@
 		<div class="nav__container">
 			<ul>
 				<li><button onclick="wow();">Club</button></li>
-				<li><button onclick="show();">Members</button></li>
 				<li><button onclick="how();">About</button></li>
-				<li><button onclick="dow();">Setting</button></li>
 			</ul>
 		</div>
 	</nav>
@@ -174,30 +173,6 @@
 		<div id="posts">
 			<!---------------------Normal post with picture----------->
 
-			<div class="messageSender">
-
-
-				<img
-					src="/LinkedClubs/Images/clubProfileImages/<c:out value="${sessionScope.club.image}"/>"
-					alt="profile image">
-
-				<form action="ProfileClub" method="post"
-					enctype="multipart/form-data">
-
-					<input class="messageSender__input" name="description" type="text"
-						placeholder="your post here :)"> <label for="real_file">Chose
-						file</label>
-					<!-- <button type="button" id="custom_button"><i class="fas fa-search"></i></button> -->
-					<span id="custom_text">No image chosen</span>&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="file" name="postFile" id="real_file" hidden="hidden">
-					<button type="submit">Post</button>
-					<span style="color: red;">${err.get("errPost")}</span>
-
-				</form>
-
-
-			</div>
-
 			<div id="update-post-container" class="hide-post-update">
 
 				<form action="UpdatePost" method="post"
@@ -219,38 +194,39 @@
 
 				<div class="post event">
 					<header>
-						<div id="messangerSender">
-							<img
-								src="/LinkedClubs/Images/clubProfileImages/<c:out value="${sessionScope.club.image}"/>"
-								alt="profile image"> <span>
-								<li><c:out value="${sessionScope.club.clubName}" /></li>
-								<li>${ post.publishedDate }</li>
-							</span>
-						</div>
+						<a href="/LinkedClubs/clubs?clubId=<c:out value="${post.club.clubId}"/>" style="color: black; text-decoration: none;">
 
+							<div>
+								<img
+									src="/LinkedClubs/Images/clubProfileImages/<c:out value="${post.club.image}"/>"
+									alt="profile image"> <span>
+									<li>${ post.club.clubName }</li>
+									<li>${ post.publishedDate }</li>
+								</span>
+							</div>
+
+						</a>
 						<div>
-							<li><button>
-									<i class="fas fa-cog" style="font-size: 20px;"
-										class="toggle-btn-update-post"
-										onclick="toggle_update_post(${ status.index })">${ status.index }</i>
-								</button></li>
 							<li name="numberLikes">${ post.likeNumber }</li>
-
 							<li><i class="fas fa-star"></i></li>
 						</div>
-
-						<input type="text" value="${ post.id }" class="current_post_id"
-							hidden>
-
 					</header>
-					<p class="current_post_decription">${ post.postDescription }</p>
-					<img class="current_post_image"
+					<p>${ post.postDescription }</p>
+					<img
 						src="/LinkedClubs/Images/postFiles/<c:out value="${post.fileLink}"/>"
 						alt="picture">
 					<header class="likes__comments">
 						<div>
+
+							<button name="likesBtn"
+								data-isLiked="${ likedPosts.contains(post.id) }"
+								<c:if test="${ likedPosts.contains(post.id) }">style="color:#FF7556;"</c:if>
+								data-id="${ post.id }">
+								<i class="fas fa-star"></i> like
+							</button>
+
 							<button name="commentsBtn">
-								<i class="fas fa-comment-alt"></i> comments
+								<i class="fas fa-comment-alt"></i> comment
 							</button>
 						</div>
 						<div>
@@ -260,31 +236,28 @@
 					</header>
 					<section class="comments">
 						<main>
-							<div>
-								<img
-									src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.club.image}"/>"
-									alt="profile picture"> <span>wowo that's
-									uncridable !!</span>
-							</div>
-							<div>
-								<img
-									src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.club.image}"/>"
-									alt="profile picture"> <span>that's amazing keep
-									going !!</span>
-							</div>
-							<div>
-								<img
-									src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.club.image}"/>"
-									alt="profile picture"> <span>wowo that's
-									uncridable!!</span>
-							</div>
-							<div>
-								<img
-									src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.club.image}"/>"
-									alt="profile picture"> <span>wowo that's
-									uncridable!!</span>
-							</div>
+
+							<c:forEach items="${allComments}" var="comment">
+
+								<c:if test="${ comment.post.id == post.id }">
+
+									<div>
+										<img
+											src="/LinkedClubs/Images/profileImages/<c:out value="${comment.student.profileImage}"/>"
+											alt="profile picture"> <span>${ comment.content }</span>
+									</div>
+
+								</c:if>
+
+							</c:forEach>
 						</main>
+						<form action="" method="post" onsubmit="return false;">
+							<button name="publishBtn" data-id="${ post.id }"
+								data-img="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.student.profileImage}"/>">Publish</button>
+							<input type="text" name="commentInput"
+								placeholder="Write a comment..."> <span
+								style="color: red;">${err.get("errCommentContent")}</span>
+						</form>
 					</section>
 				</div>
 
@@ -296,7 +269,7 @@
 				<header>
 					<div>
 						<img
-							src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.club.image}"/>"
+							src="/LinkedClubs/Images/profileImages/<c:out value="${club.image}"/>"
 							alt="profile image"> <span>
 							<li>zakaria najib</li>
 							<li>2h.</li>
@@ -328,25 +301,25 @@
 					<main>
 						<div>
 							<img
-								src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.club.image}"/>"
+								src="/LinkedClubs/Images/clubProfileImages/<c:out value="${club.image}"/>"
 								alt="profile picture"> <span>wowo that's uncridable
 								!!</span>
 						</div>
 						<div>
 							<img
-								src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.club.image}"/>"
+								src="/LinkedClubs/Images/clubProfileImages/<c:out value="${club.image}"/>"
 								alt="profile picture"> <span>that's amazing keep
 								going !!</span>
 						</div>
 						<div>
 							<img
-								src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.club.image}"/>"
+								src="/LinkedClubs/Images/clubProfileImages/<c:out value="${club.image}"/>"
 								alt="profile picture"> <span>wowo that's
 								uncridable!!</span>
 						</div>
 						<div>
 							<img
-								src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.club.image}"/>"
+								src="/LinkedClubs/Images/clubProfileImages/<c:out value="${club.image}"/>"
 								alt="profile picture"> <span>wowo that's
 								uncridable!!</span>
 						</div>
@@ -450,42 +423,6 @@
 		</div>
 	</div>
 
-	<!--------------------Listes of members-------------------------------->
-
-	<div id="grid__container" style="display: none;">
-		<c:forEach items="${members}" var="member" varStatus="status">
-
-			<div class="card">
-				<div class="top__container">
-					<div class="cover__image">
-						<img
-							src="/LinkedClubs/Images/coverImages/<c:out value="${member.coverImage}"/>">
-					</div>
-					<div class="profile__image">
-						<img
-							src="/LinkedClubs/Images/profileImages/<c:out value="${member.profileImage}"/>">
-					</div>
-				</div>
-				<div class="law__container">
-					<div>
-						<h3>${member.fullName}</h3>
-						<h4>Payed : ${membersCNE.get(status.index).payed}</h4>
-					</div>
-
-					<form action="">
-						<input name="accept" type="button" value="Accept" class="btn1" data-studentId="${member.CNE}" />
-						<input name="decline" type="button" value="Decline" class="btn2" data-studentId="${member.CNE}" />
-					</form>
-
-				</div>
-				<br> <br>
-			</div>
-
-		</c:forEach>
-
-	</div>
-
-
 	<!--------------------About Club-------------------------------->
 	<div id="About__container" style="display: none;">
 
@@ -495,7 +432,7 @@
 				<div class="left__cantainer" id="left__cantainer">
 
 					<img
-						src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.club.image}"/>"
+						src="/LinkedClubs/Images/clubProfileImages/<c:out value="${club.image}"/>"
 						alt="">
 
 				</div>
@@ -530,76 +467,7 @@
 
 	</div>
 
-	<div id="Club_sett" style="display: none;">
-		<h1>Club Setting</h1>
-		<form action="ClubSetting" method="post" enctype="multipart/form-data">
-			<div class="form_container">
-
-				<div class="sett_info" id="general_info">
-
-
-					<div class="input-container">
-						<span>ClubName :</span> <input required type="text" name="ClubName"
-							class="input" value="<c:out value="${sessionScope.club.clubName}"/>" />
-
-					</div>
-					<div class="input-container">
-						<span>Password :</span> <input required type="password" name="password"
-							class="input"  />
-
-
-					</div>
-					<div class="input-container">
-						<span>Confirm password :</span> <input required type="password"
-							name="confirmPassword" class="input" />
-
-
-					</div>
-
-
-					<div class="input-container">
-						<span>Facebook</span> <input required type="text" name="Facebook"
-							class="input" value="<c:out value="${sessionScope.club.facebook}"/>" />
-
-
-					</div>
-
-					<div class="input-container">
-						<span>Instagram</span> <input required type="text" name="Instagram"
-							class="input" value="<c:out value="${sessionScope.club.instagram}"/>" />
-
-
-					</div>
-
-				</div>
-
-				<div class="signup_info" id="signup_info">
-
-
-					<div class="input-container">
-						<span>Image</span> <input type="file" name="image" class="input" />
-
-
-					</div>
-					<div class="input-container">
-						<span>Cover</span> <input type="file" name="cover" class="input" />
-
-
-					</div>
-					<div class="input-container textarea">
-						<span id="sp_mess" style="padding-bottom: 6px;">ClubBio :</span>
-						<textarea name="ClubBio" class="input"><c:out value="${sessionScope.club.clubBio}"/></textarea>
-
-
-					</div>
-
-					<input type="submit" value="Send" class="btn" />
-
-				</div>
-
-			</div>
-		</form>
-	</div>
+	
 
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

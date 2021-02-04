@@ -5,6 +5,8 @@ const addReminderBtns = document.getElementsByName("addReminder");
 const posts = document.querySelectorAll(".post");
 const sectionBtns = document.querySelectorAll(".likes__comments");
 const commentSections = document.querySelectorAll(".comments");
+const joinClubBtn = document.getElementById('joinBtn');
+
 //Getting ticketBtn 
 const ticketBtns = document.querySelectorAll("button[name=ticketBtn]");
 //Getting accept members button
@@ -64,14 +66,6 @@ const appendReminder = (parent, title, date) => {
     parent.children[3].style.display="none";
 };
 
-const warningReminder = (parent) => {
-    const div = document.createElement("div");
-    div.setAttribute("class", "reminderErr");
-    div.innerHTML = "Check the title and date";
-    parent.append(div);
-    //setting display err to false
-    displayErrReminder=false;
-};
 
 //Handling Comment
 const comment = (event) => {
@@ -106,6 +100,15 @@ const like = (event) => {
     const params = "id=" + postId + "&isLiked=" + isLiked;
     if (!JSON.parse(isLiked)) ajaxCall(path, () => changeLikeBtn(likeBtn, "#FF7556", "true"), undefined, params);
     else ajaxCall(path, undefined, () => changeLikeBtn(likeBtn, "black", "false"), params);
+};
+
+//Handle Join Club by student
+const joinClub = (event) => {
+ const joinBtn = event.target;
+ const clubId = joinBtn.getAttribute("data-clubId");
+ const path = "http://localhost:8080/LinkedClubs/HandleJoinClub";
+ const params = "clubId=" + clubId;
+ ajaxCall(path, undefined, undefined, params);
 };
 
 //Increment and decrement nbr of likes
@@ -146,9 +149,10 @@ const addNotification=(event)=>{
 	const eventBtn=event.target;
 	const title=eventBtn.getAttribute("data-title");
 	const date=eventBtn.getAttribute("data-date");
-	const isClicked=eventBtn.getAttribute("data-clicked");
-	const path="http://localhost:8080/LinkedClubs/HandleLikes";
-	const params="title="+title+"&date="+date+"&isClicked="+isClicked;
+	const postId=eventBtn.getAttribute("data-postId");
+	const isClicked=eventBtn.getAttribute("data-clicked");	
+	const path="http://localhost:8080/LinkedClubs/HandleNotification";
+	const params="title="+title+"&date="+date+"&isClicked="+isClicked+"&postId="+postId;
 	if(!JSON.parse(isClicked)) ajaxCall(path, () => appendNotification(eventBtn,title,date), undefined, params);
 };
 const appendNotification=(btn,title,date)=>{
@@ -197,3 +201,5 @@ refuseBtns.forEach(Element => {
 ticketBtns.forEach(Element => {
     Element.addEventListener("click", (event) => addNotification(event));
 });
+
+joinClubBtn.addEventListener("click", (event) => joinClub(event));

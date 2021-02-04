@@ -18,26 +18,24 @@ const displayComments=(event)=>{
 const displayReminder=()=>{
 	const notification=document.getElementById("notification");
 	notification.style.display="none";
-    const reminderContainer=document.getElementById("reminder_contain_mobile");
+    const reminderContainer=document.getElementById("reminder__contain__mobile");
     reminderContainer.style.display="block";
 };
 
 const hidReminder=()=>{
-    const reminderContainer=document.getElementById("reminder_contain_mobile");
+    const reminderContainer=document.getElementById("reminder__contain__mobile");
     reminderContainer.style.display="none";
 };  
 
 const diplayHidNotification=()=>{
 	const notification=document.getElementById("notification");
-	if(!isNotificationOpen) {
-		notification.style.display="block";
-		isNotificationOpen=true;
-	}else {
-		notification.style.display="none";
-		isNotificationOpen=false;
-	}
-
+	notification.style.display="block";
 };
+
+const hidNotification=()=>{
+	const notification=document.getElementById("notification");
+	notification.style.display="none";
+}
 
 //Atach to event listeners
 commentBtns.forEach(element=>{
@@ -47,4 +45,4 @@ notificationBtn.addEventListener("click",displayReminder);
 closeBtn.addEventListener("click",hidReminder);
 notifyBtn.addEventListener("click",diplayHidNotification);
 
-notifyBtn.addEventListener("blur",diplayHidNotification);
+notifyBtn.addEventListener("blur",hidNotification);

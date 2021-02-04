@@ -23,7 +23,18 @@ public class Post {
 	private int likeNumber;
 	private int commentNumber;
 	
+	@OneToOne
+	private Notification notification;
+	
 	// Constructors
+
+	public Notification getNotification() {
+		return notification;
+	}
+
+	public void setNotification(Notification notification) {
+		this.notification = notification;
+	}
 
 	public Post() {
 		// TODO Auto-generated constructor stub

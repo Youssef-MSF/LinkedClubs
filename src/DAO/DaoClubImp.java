@@ -99,5 +99,28 @@ public class DaoClubImp implements DaoClub {
 
 		return null;
 	}
+	
+	// Method for getting club images
+	
+	public static ArrayList<Club> getClubImages(){
+		Session session=HibernateUtil.openSession();
+		session.beginTransaction();
+		try {
+			@SuppressWarnings("unchecked")
+			ArrayList<Club> clubImages = (ArrayList<Club>) session.createSQLQuery("SELECT * FROM club").addEntity(Club.class).list();
+			System.out.println("worked");
+			session.getTransaction().commit();
+			
+			//System.out.println("POSTS ---> " + clubImages.get(0));
+			
+			return clubImages;
+			
+		}catch(Exception e) {
+			session.beginTransaction().rollback();
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 
 }

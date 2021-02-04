@@ -16,6 +16,8 @@ import DAO.DaoComment;
 import DAO.DaoCommentImp;
 import DAO.DaoJoinClub;
 import DAO.DaoJoinClubImp;
+import DAO.DaoNotification;
+import DAO.DaoNotificationImp;
 import DAO.DaoPost;
 import DAO.DaoPostImp;
 import DAO.DaoPostStudent;
@@ -29,6 +31,7 @@ import Services.Entities.PostStudent;
 import Services.Entities.Student;
 import Services.Verification.CommentVerification;
 import WEB.Models.AllComments;
+import WEB.Models.AllNotification;
 import WEB.Models.PostsOfClub;
 import WEB.Models.RemindersOfStudent;
 
@@ -44,6 +47,7 @@ public class ProfileServlet extends HttpServlet {
 	private DaoComment daoCommentImp;
 	private DaoPostStudent daoPostStudentImp;
 	private DaoReminder daoReminderImp;
+	private DaoNotification daoNotificationImp;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -65,6 +69,7 @@ public class ProfileServlet extends HttpServlet {
 		this.daoCommentImp = new DaoCommentImp();
 		this.daoPostStudentImp = new DaoPostStudentImp();
 		this.daoReminderImp = new DaoReminderImp();
+		this.daoNotificationImp=new DaoNotificationImp();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -92,6 +97,9 @@ public class ProfileServlet extends HttpServlet {
 		
 		// Getting all the comments, and then we'll check for each post and its comments in the jsp !!
 		AllComments allComments = new AllComments(this.daoCommentImp.getAllComments());
+		
+		//Getting all the notification correspond to a student
+		AllNotification allNotifications = new AllNotification(this.daoNotificationImp.getAll(CNE));
 
 		// Getting the lines in clubsmembers table related with the current student
 		ArrayList<ClubsMembers> clubIds = this.daoJoinClubImp.readClubs(CNE);
@@ -112,7 +120,13 @@ public class ProfileServlet extends HttpServlet {
 		
 		RemindersOfStudent remindersOfStudent = new RemindersOfStudent(CNE, this.daoReminderImp.getStudentReminder(CNE));
 
-
+		//Variables for number of reminders and number of notifications
+		int nbrNotifications= allNotifications.getNotificationsList().size();
+		int nbrReminders= remindersOfStudent.getReminders().size();
+				
+		request.setAttribute("nbrNotifications", nbrNotifications);
+		request.setAttribute("nbrReminders", nbrReminders);
+		
 		request.setAttribute("posts", postsOfClub.getPostsOfClub());
 
 		request.setAttribute("likedPosts", likedPostsIds);
@@ -120,6 +134,10 @@ public class ProfileServlet extends HttpServlet {
 		request.setAttribute("allComments", allComments.getAllComments());
 		
 		request.setAttribute("reminders", remindersOfStudent.getReminders());
+		
+		request.setAttribute("notifications", allNotifications.getNotificationsList());
+		
+		
 
 		request.getServletContext().getRequestDispatcher("/WEB-INF/JSP/Profile.jsp").forward(request, response);
 	}

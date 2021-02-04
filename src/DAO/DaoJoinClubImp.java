@@ -69,8 +69,6 @@ public class DaoJoinClubImp implements DaoJoinClub {
 					.list();
 			session.getTransaction().commit();
 
-			System.out.println(getAllClubsAndMembers.get(0).getCNE());
-
 			return getAllClubsAndMembers;
 
 		} catch (Exception e) {
@@ -126,15 +124,15 @@ public class DaoJoinClubImp implements DaoJoinClub {
 		Session session = HibernateUtil.openSession();
 		try {
 			session.beginTransaction();
-			
+
 			@SuppressWarnings("unchecked")
 			ArrayList<ClubsMembers> clubsMembersList = (ArrayList<ClubsMembers>) session
 					.createSQLQuery("SELECT * FROM clubsmembers WHERE CNE='" + clubsMembers.getCNE() + "' AND clubId='"
 							+ clubsMembers.getClubId() + "'")
 					.addEntity(ClubsMembers.class).list();
-			
+
 			ClubsMembers clbMembers = clubsMembersList.get(0);
-			
+
 			clbMembers.setClubId(clubsMembers.getClubId());
 			clbMembers.setCNE(clubsMembers.getCNE());
 			clbMembers.setPayed(true);
@@ -150,6 +148,33 @@ public class DaoJoinClubImp implements DaoJoinClub {
 		}
 		// TODO Auto-generated method stub
 		return clubsMembers;
+	}
+
+	@Override
+	public ClubsMembers add(ClubsMembers clubsMembers) {
+		// TODO Auto-generated method stub
+		Session session = HibernateUtil.openSession();
+		try {
+			session.beginTransaction();
+			
+			@SuppressWarnings("unchecked")
+			ArrayList<ClubsMembers> clubsMembersList = (ArrayList<ClubsMembers>) session
+					.createSQLQuery("SELECT * FROM clubsmembers WHERE CNE='" + clubsMembers.getCNE() + "' AND clubId='"
+							+ clubsMembers.getClubId() + "'")
+					.addEntity(ClubsMembers.class).list();
+			
+			System.out.println(clubsMembersList.isEmpty());
+			
+			if (clubsMembersList.isEmpty()) {
+				session.save(clubsMembers);
+				session.getTransaction().commit();
+				return clubsMembers;
+			}
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			// TODO: handle exception
+		}
+		return null;
 	}
 
 }
