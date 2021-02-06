@@ -10,59 +10,56 @@ import javax.servlet.http.HttpServletResponse;
 
 import DAO.DaoComment;
 import DAO.DaoCommentImp;
-import DAO.DaoPost;
-import DAO.DaoPostImp;
 import Services.Entities.Comment;
-import Services.Entities.Post;
 import Services.Verification.CommentVerification;
-import Services.Verification.PostVerification;
-
 /**
  * Servlet implementation class HandleCommentsServlet
  */
 @WebServlet("/HandleComments")
 public class HandleCommentsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	private DaoComment daoCommentImp;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public HandleCommentsServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public HandleCommentsServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Servlet#init(ServletConfig)
 	 */
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
-		
-		this.daoCommentImp=new DaoCommentImp();
+
+		this.daoCommentImp = new DaoCommentImp();
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		CommentVerification commentVerification=new CommentVerification(this.daoCommentImp);
-		Comment comment=commentVerification.verifyComment(request);
-		System.out.println("comment: "+(String) request.getParameter("comment"));
-		
-		if(commentVerification.getErr().isEmpty()) {
+
+		CommentVerification commentVerification = new CommentVerification(this.daoCommentImp);
+		@SuppressWarnings("unused")
+		Comment comment = commentVerification.verifyComment(request);
+
+		if (commentVerification.getErr().isEmpty()) {
 			response.setContentType("text/xml");
-	        response.setHeader("Cache-Control", "no-cache");
-	        response.getWriter().write("<message>success</message>");
-		}else {
+			response.setHeader("Cache-Control", "no-cache");
+			response.getWriter().write("<message>success</message>");
+		} else {
 			response.setContentType("text/xml");
-	        response.setHeader("Cache-Control", "no-cache");
-	        response.getWriter().write("<message>failure</message>");
+			response.setHeader("Cache-Control", "no-cache");
+			response.getWriter().write("<message>failure</message>");
 		}
-		
+
 	}
 
 }

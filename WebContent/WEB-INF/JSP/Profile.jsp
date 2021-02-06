@@ -39,10 +39,12 @@
 			<div>
 				<ul>
 					<li><c:out value="${sessionScope.student.fullName}" /></li>
-					<li><i class="fab fa-facebook"></i><span><c:out
+					<li><i class="fab fa-facebook-f"></i><span><c:out
 								value="${sessionScope.student.facebook}" /></span></li>
 					<li><i class="fab fa-instagram"></i><span><c:out
 								value="${sessionScope.student.instagram}" /></span></li>
+					<li><i class="fal fa-book-user"></i><span><c:out
+								value="${sessionScope.student.studentBio}" /></span></li>
 				</ul>
 				<span>Clubs<span id="nbrClubsJoined" style="color: #FF7556;">${ nbrJoinedClubs }</span>
 					<button>

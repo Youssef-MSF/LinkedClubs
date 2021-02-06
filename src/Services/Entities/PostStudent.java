@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table()
+@Table(name="poststudent")
 public class PostStudent {
 	//Varibales
 	@Id

@@ -14,8 +14,6 @@ import javax.servlet.http.HttpSession;
 
 import DAO.DaoComment;
 import DAO.DaoCommentImp;
-import DAO.DaoJoinClub;
-import DAO.DaoJoinClubImp;
 import DAO.DaoNotification;
 import DAO.DaoNotificationImp;
 import DAO.DaoPost;
@@ -24,14 +22,12 @@ import DAO.DaoPostStudent;
 import DAO.DaoPostStudentImp;
 import DAO.DaoReminder;
 import DAO.DaoReminderImp;
-import Services.Entities.ClubsMembers;
 import Services.Entities.Post;
 import Services.Entities.PostStudent;
 import Services.Entities.Student;
 import WEB.Models.AllComments;
 import WEB.Models.AllNotification;
 import WEB.Models.AllPosts;
-import WEB.Models.PostsOfClub;
 import WEB.Models.RemindersOfStudent;
 
 /**
@@ -129,14 +125,5 @@ public class HomePage extends HttpServlet {
 		request.getServletContext().getRequestDispatcher("/WEB-INF/JSP/homePage.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
 
 }

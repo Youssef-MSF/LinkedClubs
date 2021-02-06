@@ -6,8 +6,6 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.Session;
-
 import DAO.DaoComment;
 import DAO.DaoPost;
 import DAO.DaoPostImp;

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.hibernate.Session;
 
 import DAO.UTIL.HibernateUtil;
-import Services.Entities.Comment;
 import Services.Entities.Reminder;
 
 public class DaoReminderImp implements DaoReminder {

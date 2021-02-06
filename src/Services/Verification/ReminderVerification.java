@@ -1,6 +1,5 @@
 package Services.Verification;
 
-import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,20 +25,20 @@ public class ReminderVerification {
 
 		String reminderTitle = request.getParameter("title");
 		String reminderDate = request.getParameter("date");
-		
+
 		HttpSession session = request.getSession();
 		Student student = (Student) session.getAttribute("student");
-		
+
 		Reminder reminder = new Reminder();
-		
+
 		verifyTitle(reminderTitle, reminder);
 		verifyDate(reminderDate, reminder);
 		reminder.setStudent(student);
-		
+
 		if (this.err.isEmpty()) {
 			return this.daoReminderImp.add(reminder);
 		}
-		
+
 		return reminder;
 	}
 
@@ -58,7 +57,7 @@ public class ReminderVerification {
 	}
 
 	public void verifyDate(String date, Reminder reminder) {
-		
+
 		reminder.setReminderDate(date);
 
 		try {
@@ -69,7 +68,7 @@ public class ReminderVerification {
 			// TODO: handle exception
 			err.put("errReminderDate", e.getMessage());
 		}
-		
+
 	}
 
 	// Getters and Setters

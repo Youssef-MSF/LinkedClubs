@@ -6,9 +6,6 @@ import org.hibernate.Session;
 
 import DAO.UTIL.HibernateUtil;
 import Services.Entities.Club;
-import Services.Entities.ClubsMembers;
-import Services.Entities.PostStudent;
-import Services.Entities.Student;
 
 public class DaoClubImp implements DaoClub {
 
@@ -80,6 +77,7 @@ public class DaoClubImp implements DaoClub {
 		return club;
 	}
 
+	// Get all clubs function
 	@Override
 	public ArrayList<Club> getAllClubs() {
 		Session session = HibernateUtil.openSession();
@@ -109,10 +107,7 @@ public class DaoClubImp implements DaoClub {
 			@SuppressWarnings("unchecked")
 			ArrayList<Club> clubImages = (ArrayList<Club>) session.createSQLQuery("SELECT * FROM club")
 					.addEntity(Club.class).list();
-			System.out.println("worked");
 			session.getTransaction().commit();
-
-			// System.out.println("POSTS ---> " + clubImages.get(0));
 
 			return clubImages;
 
@@ -124,6 +119,7 @@ public class DaoClubImp implements DaoClub {
 		return null;
 	}
 
+	// Update number of members of a club
 	@Override
 	public Club updateNumberOfMembers(Club club) {
 		// TODO Auto-generated method stub

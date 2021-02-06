@@ -13,9 +13,7 @@ import javax.servlet.http.HttpSession;
 import DAO.DaoClub;
 import DAO.DaoClubImp;
 import Services.Entities.Club;
-import Services.Entities.Student;
 import Services.Verification.ClubLogin;
-import Services.Verification.Login;
 
 /**
  * Servlet implementation class ClubLoginServlet
@@ -24,50 +22,53 @@ import Services.Verification.Login;
 public class ClubLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private DaoClub daoClubImp;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ClubLoginServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-    
-    public void init(ServletConfig config) throws ServletException {
-		System.out.println("Servlet Login up has started");
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public ClubLoginServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
-		 this.daoClubImp= new DaoClubImp();
+		this.daoClubImp = new DaoClubImp();
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.getServletContext().getRequestDispatcher("/WEB-INF/JSP/ClubLogin.jsp").forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		ClubLogin clubLoginForm=new ClubLogin(this.daoClubImp);
-		Club club=clubLoginForm.verifyLogin(request);
-		
-		if(!clubLoginForm.getErr().isEmpty()) {
+
+		ClubLogin clubLoginForm = new ClubLogin(this.daoClubImp);
+		Club club = clubLoginForm.verifyLogin(request);
+
+		if (!clubLoginForm.getErr().isEmpty()) {
 			request.setAttribute("club", club);
 			request.setAttribute("err", clubLoginForm.getErr());
 			request.getServletContext().getRequestDispatcher("/WEB-INF/JSP/ClubLogin.jsp").forward(request, response);
-		}else {
-			
+		} else {
+
 			HttpSession session = request.getSession();
 			session.setAttribute("club", club);
-			
+
 			response.sendRedirect("/LinkedClubs/ProfileClub");
 		}
-		
+
 	}
 
 }

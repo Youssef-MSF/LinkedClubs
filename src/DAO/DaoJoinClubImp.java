@@ -1,16 +1,12 @@
 package DAO;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 import org.hibernate.Session;
 
 import DAO.UTIL.HibernateUtil;
 import Services.Entities.Club;
 import Services.Entities.ClubsMembers;
-import Services.Entities.Post;
-import Services.Entities.PostStudent;
 import Services.Entities.Student;
 
 public class DaoJoinClubImp implements DaoJoinClub {
@@ -51,7 +47,6 @@ public class DaoJoinClubImp implements DaoJoinClub {
 		ArrayList<Student> members = new ArrayList<Student>();
 
 		for (ClubsMembers clubsMembers : membersCNE) {
-			System.out.println("tttttttttttt --> " + clubsMembers.getCNE());
 			members.add(daoStudentImp.find(clubsMembers.getCNE()));
 		}
 
@@ -88,7 +83,6 @@ public class DaoJoinClubImp implements DaoJoinClub {
 		ArrayList<Club> clubs = new ArrayList<Club>();
 
 		for (ClubsMembers clubsMembers : clubIds) {
-			System.out.println("tttttttttttt --> " + clubsMembers.getCNE());
 			clubs.add(daoClubImp.find(clubsMembers.getCNE()));
 		}
 
@@ -108,7 +102,6 @@ public class DaoJoinClubImp implements DaoJoinClub {
 							+ clubsMembers.getClubId() + "'")
 					.addEntity(ClubsMembers.class).list();
 
-			// System.out.println("tkhrbi9 ===> " + postStudent.getId());
 			session.delete(clubsMembersList.get(0));
 			session.getTransaction().commit();
 			return clubsMembers;
@@ -162,8 +155,6 @@ public class DaoJoinClubImp implements DaoJoinClub {
 					.createSQLQuery("SELECT * FROM clubsmembers WHERE CNE='" + clubsMembers.getCNE() + "' AND clubId='"
 							+ clubsMembers.getClubId() + "'")
 					.addEntity(ClubsMembers.class).list();
-
-			System.out.println(clubsMembersList.isEmpty());
 
 			if (clubsMembersList.isEmpty()) {
 

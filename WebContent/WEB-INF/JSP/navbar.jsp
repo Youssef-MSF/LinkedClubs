@@ -2,7 +2,7 @@
 
 <nav id="navBar">
 	<main>
-		<a href="/LinkedClubs">LinkedClubs</a>
+		<a href="home">LinkedClubs</a>
 		<button>
 			<input type="text" placeholder="search"> <i
 				class="fab fa-searchengin"></i>
@@ -18,13 +18,14 @@
 				</button>
 				<span id="nbrNotificattion">${ nbrNotifications }</span> <img
 					src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.student.profileImage}"/>"
-					alt="profile picture"> <a href="profile"><span id="fullName"><c:out
+					alt="profile picture"> <a href="profile"><span
+					id="fullName"><c:out
 							value="${sessionScope.student.fullName}" /></span></a>
 
 				<form action="Logout" method="post">
 
-					<button type="submit"
-						style="color: white; display: block; margin-left: 20px;">
+					<button id="logout_btn" type="submit"
+						style="color: white; display: block; margin-left: 20px; @media screen and (max-width: 600px) {  margin-left: 0px;}}">
 						<i class="fas fa-sign-out-alt"></i>
 					</button>
 

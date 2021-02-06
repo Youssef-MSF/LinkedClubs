@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.hibernate.Session;
 
 import DAO.UTIL.HibernateUtil;
-import Services.Entities.ClubsMembers;
 import Services.Entities.PostStudent;
 
 public class DaoPostStudentImp implements DaoPostStudent {
@@ -59,7 +58,6 @@ public class DaoPostStudentImp implements DaoPostStudent {
 					+ postStudent.getStudent_id() + "' AND post_id='" + postStudent.getPost_id() + "'")
 					.addEntity(PostStudent.class).list();
 
-			//System.out.println("tkhrbi9 ===> " + postStudent.getId());
 			session.delete(postStudentsList.get(0));
 			session.getTransaction().commit();
 			return postStudent;

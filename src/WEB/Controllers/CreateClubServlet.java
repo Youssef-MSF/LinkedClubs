@@ -70,8 +70,6 @@ public class CreateClubServlet extends HttpServlet {
 		String adminUsername = (String) session.getAttribute("adminUsername");
 		String adminPassword = (String) session.getAttribute("adminPassword");
 		
-		System.out.println(adminUsername);
-		
 		if (adminUsername==null || adminPassword==null || adminUsername.equals("") || adminPassword.equals("")) {
 			request.getServletContext().getRequestDispatcher("/WEB-INF/JSP/adminLogin.jsp").forward(request, response);
 		}else {
@@ -90,8 +88,8 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		if(adminVerification.getErr().isEmpty()) {
 		
 			response.sendRedirect("/LinkedClubs/administration");
-			
-		}else {
+
+		} else {
 			request.setAttribute("club", club);
 			request.setAttribute("err", adminVerification.getErr());
 			request.getServletContext().getRequestDispatcher("/WEB-INF/JSP/adminPage.jsp").forward(request, response);

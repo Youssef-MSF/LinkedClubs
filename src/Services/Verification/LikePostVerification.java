@@ -3,10 +3,7 @@ package Services.Verification;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.Session;
-
 import DAO.DaoPost;
-import DAO.DaoPostImp;
 import DAO.DaoPostStudent;
 import Services.Entities.Post;
 import Services.Entities.PostStudent;
@@ -26,7 +23,6 @@ public class LikePostVerification {
 
 	public PostStudent verifyLikePost(HttpServletRequest request) {
 		//Getting parameters
-		System.out.println("hhhhhhhhhhhhhh : " + request.getParameter("isLicked"));
 		int postId=Integer.parseInt((String) request.getParameter("id"));
 		boolean isLiked= Boolean.parseBoolean(request.getParameter("isLiked"));
 		

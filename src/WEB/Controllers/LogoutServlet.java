@@ -14,23 +14,24 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/Logout")
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LogoutServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-    
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public LogoutServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		HttpSession session = request.getSession();
 		session.invalidate();
-		
+
 		// Redirect to home page
 		response.sendRedirect("/LinkedClubs");
-		
+
 	}
 
 }

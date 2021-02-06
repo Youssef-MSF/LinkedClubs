@@ -2,15 +2,10 @@ package DAO;
 
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpSession;
-
 import org.hibernate.Session;
 
 import DAO.UTIL.HibernateUtil;
-import Services.Entities.ClubsMembers;
 import Services.Entities.Post;
-import Services.Entities.Student;
-import Services.Verification.PostVerification;
 
 public class DaoPostImp implements DaoPost{
 
@@ -157,7 +152,6 @@ public class DaoPostImp implements DaoPost{
 			return pst;
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("error update notifi");
 			session.getTransaction().rollback();
 		}
 		// TODO Auto-generated method stub
@@ -173,8 +167,6 @@ public ArrayList<Post> getAllPosts() {
 			@SuppressWarnings("unchecked")
 			ArrayList<Post> postsOfClub = (ArrayList<Post>) session.createSQLQuery("SELECT * FROM post").addEntity(Post.class).list();
 			session.getTransaction().commit();
-			
-			//System.out.println("POSTS ---> " + postsOfClub.get(1).getPostDescription());
 			
 			return postsOfClub;
 			

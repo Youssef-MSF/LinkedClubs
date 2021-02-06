@@ -5,7 +5,7 @@ import java.util.Date;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Post")
+@Table(name="post")
 public class Post {
 	
 	@ManyToOne

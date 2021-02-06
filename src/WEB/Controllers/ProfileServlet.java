@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.SendResult;
 
 import DAO.DaoComment;
 import DAO.DaoCommentImp;
@@ -80,9 +79,8 @@ public class ProfileServlet extends HttpServlet {
 		// Getting the current student
 		HttpSession session = request.getSession();
 		Student student = (Student) session.getAttribute("student");
-		
 
-		if (!(student==null)) {
+		if (!(student == null)) {
 			String CNE = student.getCNE();
 			// Getting the lines in the table poststudent related with the current student
 			ArrayList<PostStudent> likedPosts = this.daoPostStudentImp.getLikedPosts(CNE);
@@ -149,7 +147,6 @@ public class ProfileServlet extends HttpServlet {
 		} else {
 			response.sendRedirect("/LinkedClubs/Login");
 		}
-
 	}
 
 	/**

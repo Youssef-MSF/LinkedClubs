@@ -20,14 +20,14 @@ import Services.Verification.AcceptDeclineMembersVerification;
 public class HandleMembersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private DaoJoinClub daoJoinClubImp;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public HandleMembersServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public HandleMembersServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Servlet#init(ServletConfig)
@@ -38,36 +38,39 @@ public class HandleMembersServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	@SuppressWarnings("unused")
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		String clickedBtn = request.getParameter("btnClicked");
-		
-		System.out.println("Clicked btn  : " + clickedBtn);
-		
-		AcceptDeclineMembersVerification acceptDeclineMembersVerification = new AcceptDeclineMembersVerification(this.daoJoinClubImp);
-		ClubsMembers clubsMembers =  acceptDeclineMembersVerification.verifyClubsMembers(request);
-		
+
+		AcceptDeclineMembersVerification acceptDeclineMembersVerification = new AcceptDeclineMembersVerification(
+				this.daoJoinClubImp);
+		ClubsMembers clubsMembers = acceptDeclineMembersVerification.verifyClubsMembers(request);
+
 		if (clickedBtn.equals("accept")) {
 			response.setContentType("text/xml");
-	        response.setHeader("Cache-Control", "no-cache");
-	        response.getWriter().write("<message>success</message>");
-		}else {
+			response.setHeader("Cache-Control", "no-cache");
+			response.getWriter().write("<message>success</message>");
+		} else {
 			response.setContentType("text/xml");
-	        response.setHeader("Cache-Control", "no-cache");
-	        response.getWriter().write("<message>failure</message>");
+			response.setHeader("Cache-Control", "no-cache");
+			response.getWriter().write("<message>failure</message>");
 		}
-		
-		
+
 	}
 
 }

@@ -7,9 +7,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 
 import DAO.DaoClub;
-import DAO.DaoStudent;
 import Services.Entities.Club;
-import Services.Entities.Student;
 
 public class ClubLogin {
 
@@ -48,12 +46,6 @@ public class ClubLogin {
 			// Looking for the existing Student
 			if (err.isEmpty()) {
 				Club clb = this.daoClubImp.find(clubId);
-
-				/*student.setFullName(std.getFullName());
-				student.setFacebook(std.getFacebook());
-				student.setInstagram(std.getInstagram());
-				student.setLevel(std.getLevel());
-				student.setMajor(std.getMajor());*/
 				
 				// I need decrept the std password and compare it with student.password
 				if (clb != null) {

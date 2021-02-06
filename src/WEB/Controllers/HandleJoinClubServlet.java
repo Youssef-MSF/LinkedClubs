@@ -20,14 +20,14 @@ import Services.Verification.JoinClubVerification;
 public class HandleJoinClubServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private DaoJoinClub daoJoinClubImp;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public HandleJoinClubServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public HandleJoinClubServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Servlet#init(ServletConfig)
@@ -38,31 +38,25 @@ public class HandleJoinClubServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		JoinClubVerification joinClubVerification = new JoinClubVerification(this.daoJoinClubImp);
 		ClubsMembers clubsMembers = joinClubVerification.verifyJoinClub(request);
-		
+
 		if (clubsMembers == null) {
 			response.setContentType("text/xml");
-	        response.setHeader("Cache-Control", "no-cache");
-	        response.getWriter().write("<message>failure</message>");
-		}else {
+			response.setHeader("Cache-Control", "no-cache");
+			response.getWriter().write("<message>failure</message>");
+		} else {
 			response.setContentType("text/xml");
-	        response.setHeader("Cache-Control", "no-cache");
-	        response.getWriter().write("<message>success</message>");
+			response.setHeader("Cache-Control", "no-cache");
+			response.getWriter().write("<message>success</message>");
 		}
-		
+
 	}
 
 }

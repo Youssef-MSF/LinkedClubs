@@ -22,7 +22,6 @@ import DAO.DaoPostImp;
 import Services.Entities.Club;
 import Services.Entities.ClubsMembers;
 import Services.Entities.Post;
-import Services.Verification.NotificationVerify;
 import Services.Verification.PostVerification;
 import WEB.Models.AllComments;
 import WEB.Models.MembersOfClub;
@@ -69,10 +68,9 @@ public class ProfileClubServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		Club club = (Club) session.getAttribute("club");
-		
 
-		if (!(club==null)) {
-			String clubId =club.getClubId();
+		if (!(club == null)) {
+			String clubId = club.getClubId();
 			ArrayList<ClubsMembers> membersCNE = this.daoJoinClubImp.readMembers(clubId);
 
 			MembersOfClub membersOfClub = new MembersOfClub();
@@ -95,9 +93,6 @@ public class ProfileClubServlet extends HttpServlet {
 		} else {
 			response.sendRedirect("/LinkedClubs/ClubLogin");
 		}
-		
-		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -107,7 +102,6 @@ public class ProfileClubServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("do post method is called profile club");
 		PostVerification postForm = new PostVerification(this.daoPostImp, this.daoNotificationImp);
 		Post post = postForm.verifyPost(request);
 
@@ -117,8 +111,6 @@ public class ProfileClubServlet extends HttpServlet {
 			request.getServletContext().getRequestDispatcher("/WEB-INF/JSP/ProfileClub.jsp").forward(request, response);
 		} else
 			response.sendRedirect("/LinkedClubs/ProfileClub");
-
-		// doGet(request, response);
 	}
 
 }

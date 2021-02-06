@@ -21,52 +21,47 @@ import Services.Verification.NotificationVerify;
 @WebServlet("/HandleNotification")
 public class HandleNotificationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private DaoPost daoPostImp;
-    private DaoNotification daoNotificationImp;
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public HandleNotificationServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	private DaoPost daoPostImp;
+	private DaoNotification daoNotificationImp;
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public HandleNotificationServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Servlet#init(ServletConfig)
 	 */
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method student
-		this.daoPostImp=new DaoPostImp();
-		this.daoNotificationImp=new DaoNotificationImp();
+		this.daoPostImp = new DaoPostImp();
+		this.daoNotificationImp = new DaoNotificationImp();
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+		// doGet(request, response);
+		String isClicked = (String) request.getParameter("isClicked");
+		if (!Boolean.parseBoolean(isClicked)) {
+			NotificationVerify notificationVerify = new NotificationVerify(daoNotificationImp, daoPostImp);
+			Notification notification = notificationVerify.notificatinFct(request);
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
-		String isClicked=(String) request.getParameter("isClicked");
-		if(!Boolean.parseBoolean(isClicked)) {
-			NotificationVerify notificationVerify=new NotificationVerify(daoNotificationImp,daoPostImp);
-			Notification notification=notificationVerify.notificatinFct(request);
-
-			if(notification!=null) {
+			if (notification != null) {
 				response.setContentType("text/xml");
-		        response.setHeader("Cache-Control", "no-cache");
-		        response.getWriter().write("<message>success</message>");
-			}else {
+				response.setHeader("Cache-Control", "no-cache");
+				response.getWriter().write("<message>success</message>");
+			} else {
 				response.setContentType("text/xml");
-		        response.setHeader("Cache-Control", "no-cache");
-		        response.getWriter().write("<message>failure</message>");
+				response.setHeader("Cache-Control", "no-cache");
+				response.getWriter().write("<message>failure</message>");
 			}
 		}
 	}

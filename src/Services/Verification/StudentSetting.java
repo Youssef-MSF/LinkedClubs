@@ -3,11 +3,8 @@ package Services.Verification;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 
@@ -25,7 +22,7 @@ public class StudentSetting {
 	}
 
 	public StudentSetting(DaoStudent daoStudentImp) {
-		this.daoStudentImp=(DaoStudentImp) daoStudentImp;
+		this.daoStudentImp = (DaoStudentImp) daoStudentImp;
 	}
 
 	// Getters && Setters
@@ -80,7 +77,6 @@ public class StudentSetting {
 		verifyProfileImg(profileImage, student);
 		verifyCoverImg(coverImage, student);
 		verifyBio(bio, student);
-		
 
 		// Testing error
 		try {
@@ -92,18 +88,17 @@ public class StudentSetting {
 				if (!coverImage.isEmpty()) {
 					coverImagePart.write(coverImagesUploadDirectory + File.separator + coverImage);
 				}
-				
+
 				try {
-					
+
 					student.setCNE(CNE);
-					
-					String hashedPassword=Hashing.generateStorngPasswordHash(password1);
+
+					String hashedPassword = Hashing.generateStorngPasswordHash(password1);
 					student.setPassword(hashedPassword);
 					return this.daoStudentImp.update(student);
-					
+
 				} catch (Exception e) {
 					// TODO: handle exception
-					System.out.println(e.getMessage());
 				}
 
 			} else {
@@ -112,7 +107,6 @@ public class StudentSetting {
 		} catch (Exception e) {
 			// TODO: handle exception
 			err.put("errUpdate", e.getMessage());
-			System.out.println(e.getMessage());
 		}
 
 		return student;

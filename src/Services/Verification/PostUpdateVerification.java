@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 
 import DAO.DaoPost;
-import DAO.DaoPostImp;
 import Services.Entities.Post;
 
 public class PostUpdateVerification {
@@ -56,11 +55,11 @@ public class PostUpdateVerification {
 		String fileLink = postImagePart.getSubmittedFileName();
 
 		Post post = new Post();
-		
-		if(!postImagePart.getContentType().equals("application/octet-stream")) {
+
+		if (!postImagePart.getContentType().equals("application/octet-stream")) {
 			postImagePart.write(postImagesUploadDirectory + File.separator + fileLink);
-		}else {
-			
+		} else {
+
 		}
 
 		verifyPostDescription(postDescription, post);

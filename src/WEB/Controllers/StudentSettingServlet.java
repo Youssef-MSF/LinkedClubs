@@ -1,7 +1,6 @@
 package WEB.Controllers;
 
 import java.io.IOException;
-import java.nio.file.FileSystems;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -47,14 +46,11 @@ public class StudentSettingServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		System.out.println(FileSystems.getDefault().getPath("").toAbsolutePath().toString());
-		
+
 		request.getServletContext().getRequestDispatcher("/WEB-INF/JSP/StudentSetting.jsp").forward(request, response);
 	}
 
@@ -64,29 +60,22 @@ public class StudentSettingServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("post setting student");
 
 		StudentSetting studentSettingForm = new StudentSetting(this.daoStudentImp);
 		Student student = studentSettingForm.verifySettingStudent(request);
 
-		System.out.println("-----post setting student");
-
 		if (studentSettingForm.getErr().isEmpty()) {
-			System.out.println("---+--post setting student");
-			
-			System.out.println(student.getFullName());
-			
+
 			HttpSession session = request.getSession();
 			session.setAttribute("student", student);
-			
+
 			response.sendRedirect("/LinkedClubs/profile");
 		} else {
-			
-			System.out.println("--*---post setting student");
-			
+
 			request.setAttribute("err", studentSettingForm.getErr());
-			
-			request.getServletContext().getRequestDispatcher("/WEB-INF/JSP/StudentSetting.jsp").forward(request, response);
+
+			request.getServletContext().getRequestDispatcher("/WEB-INF/JSP/StudentSetting.jsp").forward(request,
+					response);
 		}
 
 	}

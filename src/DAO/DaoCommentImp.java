@@ -6,7 +6,6 @@ import org.hibernate.Session;
 
 import DAO.UTIL.HibernateUtil;
 import Services.Entities.Comment;
-import Services.Entities.PostStudent;
 
 public class DaoCommentImp implements DaoComment {
 
@@ -14,6 +13,7 @@ public class DaoCommentImp implements DaoComment {
 		// TODO Auto-generated constructor stub
 	}
 
+	// Add new comment
 	@Override
 	public Comment add(Comment comment) {
 		// TODO Auto-generated method stub
@@ -29,6 +29,7 @@ public class DaoCommentImp implements DaoComment {
 		return comment;
 	}
 
+	// Get all comments function
 	@Override
 	public ArrayList<Comment> getAllComments() {
 		Session session=HibernateUtil.openSession();

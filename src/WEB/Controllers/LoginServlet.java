@@ -21,53 +21,51 @@ import Services.Verification.Login;
 @WebServlet("/Login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-      private DaoStudent daoStudentImp;
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoginServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-    
-    public void init(ServletConfig config) throws ServletException {
-		System.out.println("Servlet Login up has started");
+	private DaoStudent daoStudentImp;
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public LoginServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
-		 this.daoStudentImp= new DaoStudentImp();
+		this.daoStudentImp = new DaoStudentImp();
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		request.getServletContext().getRequestDispatcher("/WEB-INF/JSP/Login.jsp").forward(request, response);
-		
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		Login loginForm=new Login(this.daoStudentImp);
-		Student student=loginForm.verifyLogin(request);
-		
-		if(!loginForm.getErr().isEmpty()) {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		Login loginForm = new Login(this.daoStudentImp);
+		Student student = loginForm.verifyLogin(request);
+
+		if (!loginForm.getErr().isEmpty()) {
 			request.setAttribute("student", student);
 			request.setAttribute("err", loginForm.getErr());
 			request.getServletContext().getRequestDispatcher("/WEB-INF/JSP/Login.jsp").forward(request, response);
-		}else {
-			
+		} else {
+
 			HttpSession session = request.getSession();
 			session.setAttribute("student", student);
-			
+
 			response.sendRedirect("/LinkedClubs/profile");
 		}
-	
-		
+
 		// TODO Auto-generated method stub
-		//doGet(request, response);
 	}
 
 }
