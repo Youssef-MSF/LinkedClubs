@@ -12,5 +12,6 @@ public interface DaoClub {
 	public Club find(String clubId);
 	public Club update(Club club);
 	public ArrayList<Club> getAllClubs();
+	public Club updateNumberOfMembers(Club club);
 
 }

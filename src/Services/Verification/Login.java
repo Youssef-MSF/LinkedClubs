@@ -45,12 +45,6 @@ public class Login {
 		// Looking for the existing Student
 		if (err.isEmpty()) {
 			Student std = this.daoStudentImp.find(CNE);
-
-			/*student.setFullName(std.getFullName());
-			student.setFacebook(std.getFacebook());
-			student.setInstagram(std.getInstagram());
-			student.setLevel(std.getLevel());
-			student.setMajor(std.getMajor());*/
 			
 			// I need decrept the std password and compare it with student.password
 			if (std != null) {

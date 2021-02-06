@@ -181,7 +181,7 @@ body {
   text-align: justify;
   font-size: 0.9em;
 }
-#posts .post img {
+#posts .post img, embed {
   width: 100%;
   margin: 10px 0px;
 }

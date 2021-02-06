@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="/LinkedClubs/CSS/signup_styling.css">
     <title>Sign up</title>
+    
+    <link rel="icon" href="/LinkedClubs/Images/LCbg.png"
+	type="image/icon type">
+    
 </head>
 
 <body>
@@ -85,13 +89,13 @@
 				
 				
                 <input type="submit" value="Sign up" id="signup_btn">
+                
+                <p> Already have an account ? <a href="Login">sign in</a> here ! </p>
 
             </div>
 
         </div>
     </form>
-    
-    <a href="/LinkedClubs/Login">Login</a>
 
     <script>
         function next_form() {

@@ -9,6 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/LinkedClubs/CSS/StudentSetting.css">
     <title>Setting student profile</title>
+    
+    <link rel="icon" href="/LinkedClubs/Images/LCbg.png"
+	type="image/icon type">
+    
 </head>
 
 <body>

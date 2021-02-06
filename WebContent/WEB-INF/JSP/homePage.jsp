@@ -11,73 +11,22 @@
 <script src="https://kit.fontawesome.com/62e9ec17ac.js"
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css"
-	href="/LinkedClubs/CSS/ProfilePage.css" media="screen" />
+	href="/LinkedClubs/CSS/homePage.css" media="screen" />
 <link rel="stylesheet" type="text/css"
 	href="/LinkedClubs/CSS/NavBar.css" media="screen" />
-
-<link rel="stylesheet"
-	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-	crossorigin="anonymous" />
-
-
-<title>Profile</title>
+<title>Home</title>
 
 <link rel="icon" href="/LinkedClubs/Images/LCbg.png" type="image/icon type">
 
 </head>
 <body>
 	<c:import url="navbar.jsp" />
-	<!----------------Personnal info sections--------------------->
-	<!----------------Personnal info sections--------------------->
-	<section id="personal__info"
-		style="background-image: url('/LinkedClubs/Images/coverImages/<c:out value="${sessionScope.student.coverImage}"/>')">
-		<main>
-			<img
-				src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.student.profileImage}"/>"
-				alt="profile picture">
-			<div>
-				<ul>
-					<li><c:out value="${sessionScope.student.fullName}" /></li>
-					<li><i class="fab fa-facebook"></i><span><c:out
-								value="${sessionScope.student.facebook}" /></span></li>
-					<li><i class="fab fa-instagram"></i><span><c:out
-								value="${sessionScope.student.instagram}" /></span></li>
-				</ul>
-				<span>Clubs<span id="nbrClubsJoined" style="color: #FF7556;">${ nbrJoinedClubs }</span>
-					<button>
-						<a href="/LinkedClubs/StudentSetting" style="color: initial;"><i
-							class="fas fa-cog"></i></a>
-					</button></span>
-			</div>
-		</main>
-	</section>
-	<!--------------Post && Reminder section----------------------->
-	<!--------------Post && Reminder section----------------------->
+
 	<div id="posts__reminder">
-		<div id="reminder">
-			<section>
-				<span style="color: #FF7556; font-size: 1.5em">Reminder</span> <span
-					style="text-align: right;"><i class="fas fa-sticky-note"></i></span>
-			</section>
 
-			<div class="addReminder">
-				<input type="text" placeholder="Title of the reminder..."> <input
-					type="datetime-local"> <input type="submit"
-					name="addReminder" value="Add reminder"> <span
-					class="reminderErr">Check out title and Date</span>
-			</div>
-
-			<c:forEach items="${reminders}" var="reminder" varStatus="status">
-
-				<section>
-					<span>${ reminder.title }</span> <span>${ reminder.reminderDate }</span>
-				</section>
-
-			</c:forEach>
-		</div>
 		<div id="posts">
-			<!---------------------Normal post with picture----------->
+
+
 			<c:forEach items="${posts}" var="post" varStatus="status">
 				<div class="post event">
 					<header>
@@ -173,46 +122,12 @@
 				</div>
 			</c:forEach>
 
-			<!---------------Rminder small devices------------------------->
-			<div id="reminder__contain__mobile">
-				<div id="reminder__mobile">
-					<section>
-						<span style="color: #FF7556; font-size: 1.5em">Reminder</span> <span
-							style="text-align: right;"><i id="closeNotificationBtn"
-							class="fas fa-times"></i></span>
-					</section>
 
-					<div class="addReminder">
-						<input type="text" placeholder="Title of the reminder...">
-						<input type="date"> <input type="submit"
-							name="addReminder" value="Add reminder">
-					</div>
-
-					<c:forEach items="${reminders}" var="reminder" varStatus="status">
-
-						<section>
-							<span>${ reminder.title }</span> <span>${ reminder.reminderDate }</span>
-						</section>
-
-					</c:forEach>
-
-				</div>
-			</div>
-
-			<!---------------Notification small devices------------------------->
-
-			<div id="notification">
-				<c:forEach items="${notifications}" var="notification"
-					varStatus="status">
-					<section>
-						<span>${ notification.title }</span> <span>${ notification.date }</span>
-					</section>
-				</c:forEach>
-			</div>
-
-
-
-			<script src="/LinkedClubs/JS/ProfilePage.js"></script>
-			<script src="/LinkedClubs/JS/AjaxCall.js"></script>
+		</div>
+	</div>
+	
+	<script src="/LinkedClubs/JS/ProfilePage.js"></script>
+	<script src="/LinkedClubs/JS/AjaxCall.js"></script>
+	
 </body>
 </html>

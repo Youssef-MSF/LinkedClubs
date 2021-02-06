@@ -43,7 +43,7 @@
 
 .law__container h3, h4 {
 	box-sizing: border-box;
-	line-height: .6;
+	line-height: .9;
 	font-weight: lighter;
 }
 
@@ -93,6 +93,8 @@
 	height: 60px;
 	position: relative;
 	top: 200px;
+	display: flex;
+	align-items: center;
 }
 
 .nav__container ul {
@@ -104,6 +106,28 @@
 	padding: 0 10px;
 	box-sizing: border-box;
 	list-style: none;
+	border-style: groove;
+	border-width: 0px 0px 1px 0px;
+	padding-bottom: 10px;
+}
+
+.nav__container ul li {
+	flex-grow: 1;
+	text-align: center;
+}
+
+.nav__container button{
+	padding: 8px 0px;
+    width: 6em;
+    border: none;
+    outline: none;
+    transition-duration: 200ms;
+    font-weight: bolder;
+}
+
+.nav__container button:hover{
+	background-color: rgb(243, 121, 65);
+	color: white;
 }
 
 /**About club***/
@@ -678,6 +702,11 @@ h1 {
 		/*padding: 5px;*/
 		transform: translate(133px, -40px);
 	}
+	.nav__container ul {
+	
+		width: 24em;
+	
+	}
 }
 
 @media ( max-width : 383px) {
@@ -710,6 +739,7 @@ h1 {
 		/*padding: 5px;*/
 		transform: translate(90px, -40px);
 	}
+	
 }
 
 @media ( max-width : 300px) {
@@ -742,6 +772,7 @@ h1 {
 		/*padding: 5px;*/
 		transform: translate(90px, -40px);
 	}
+	
 }
 
 @media ( max-width : 275px) {

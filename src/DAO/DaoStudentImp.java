@@ -1,10 +1,13 @@
 package DAO;
 
 
+import java.util.ArrayList;
+
 //the new imports
 import org.hibernate.Session;
 
 import DAO.UTIL.HibernateUtil;
+import Services.Entities.Club;
 import Services.Entities.Student;
 
 
@@ -63,9 +66,14 @@ public class DaoStudentImp implements DaoStudent {
 			std.setFacebook(student.getFacebook());
 			std.setLevel(student.getLevel());
 			std.setMajor(student.getMajor());
-			std.setProfileImage(student.getProfileImage());
-			std.setCoverImage(student.getCoverImage());
 			std.setStudentBio(student.getStudentBio());
+			
+			if (!student.getCoverImage().isEmpty()) {
+				std.setCoverImage(student.getCoverImage());
+			}
+			if (!student.getProfileImage().isEmpty()) {
+				std.setProfileImage(student.getProfileImage());
+			}
 			
 			session.update(std);
 			
@@ -78,6 +86,27 @@ public class DaoStudentImp implements DaoStudent {
 		}
 		// TODO Auto-generated method stub
 		return student;
+	}
+
+
+	@Override
+	public ArrayList<Student> getAll() {
+		Session session = HibernateUtil.openSession();
+		session.beginTransaction();
+		try {
+			@SuppressWarnings("unchecked")
+			ArrayList<Student> allStudent = (ArrayList<Student>) session.createSQLQuery("SELECT * FROM student")
+					.addEntity(Student.class).list();
+			session.getTransaction().commit();
+
+			return allStudent;
+
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 
 }

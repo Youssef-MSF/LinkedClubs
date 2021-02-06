@@ -14,4 +14,5 @@ public interface DaoPost {
 	public Post updateLikeNumber(Post post, Boolean isLiked);
 	public Post updateCommentNumber(Post post);
 	public Post updateNotification(Post post);
+	public ArrayList<Post> getAllPosts();
 }

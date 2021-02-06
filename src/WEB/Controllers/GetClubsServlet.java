@@ -9,6 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import DAO.DaoClubImp;
 import Services.Entities.Club;
 
@@ -24,14 +26,11 @@ public class GetClubsServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		ArrayList<Club> clubs = DaoClubImp.getClubImages();
 		ArrayList<String> images = new ArrayList<String>();
 		Collections.shuffle(clubs);
-		/*
-		 * while(images.size()<=4) { int rand = new Random().nextInt(clubs.size());
-		 * String clubImage = clubs.get(rand).getImage(); if
-		 * (!(images.contains(clubImage))) { images.add(clubImage); } }
-		 */
+	
 
 		this.result = "<result>";
 		

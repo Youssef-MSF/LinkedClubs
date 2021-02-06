@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.SendResult;
 
 import DAO.DaoComment;
 import DAO.DaoCommentImp;
@@ -69,7 +70,7 @@ public class ProfileServlet extends HttpServlet {
 		this.daoCommentImp = new DaoCommentImp();
 		this.daoPostStudentImp = new DaoPostStudentImp();
 		this.daoReminderImp = new DaoReminderImp();
-		this.daoNotificationImp=new DaoNotificationImp();
+		this.daoNotificationImp = new DaoNotificationImp();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -78,68 +79,77 @@ public class ProfileServlet extends HttpServlet {
 
 		// Getting the current student
 		HttpSession session = request.getSession();
-		String CNE = ((Student) session.getAttribute("student")).getCNE();
-
+		Student student = (Student) session.getAttribute("student");
 		
-		// Getting the lines in the table poststudent related with the current student
-		ArrayList<PostStudent> likedPosts = this.daoPostStudentImp.getLikedPosts(CNE);
 
-		// Getting the ids of the posts liked by the current student from the previous list from poststudent
-		ArrayList<Integer> likedPostsIds = new ArrayList<Integer>();
+		if (!(student==null)) {
+			String CNE = student.getCNE();
+			// Getting the lines in the table poststudent related with the current student
+			ArrayList<PostStudent> likedPosts = this.daoPostStudentImp.getLikedPosts(CNE);
 
-		// Loop through each line of likedPosts from poststudent and add it to the posts ids ArrayList
-		for (PostStudent likedPosts_ids : likedPosts) {
+			// Getting the ids of the posts liked by the current student from the previous
+			// list from poststudent
+			ArrayList<Integer> likedPostsIds = new ArrayList<Integer>();
 
-			likedPostsIds.add(likedPosts_ids.getPost_id());
+			// Loop through each line of likedPosts from poststudent and add it to the posts
+			// ids ArrayList
+			for (PostStudent likedPosts_ids : likedPosts) {
 
+				likedPostsIds.add(likedPosts_ids.getPost_id());
+
+			}
+
+			// Getting all the comments, and then we'll check for each post and its comments
+			// in the jsp !!
+			AllComments allComments = new AllComments(this.daoCommentImp.getAllComments());
+
+			// Getting all the notification correspond to a student
+			AllNotification allNotifications = new AllNotification(this.daoNotificationImp.getAll(CNE));
+
+			// Getting the lines in clubsmembers table related with the current student
+			ArrayList<ClubsMembers> clubIds = this.daoJoinClubImp.readClubs(CNE);
+
+			ArrayList<Post> posts = new ArrayList<Post>();
+
+			for (ClubsMembers clubsMembers : clubIds) {
+
+				posts.addAll(this.daoPostImp.getPosts(clubsMembers.getClubId()));
+
+			}
+
+			Collections.shuffle(posts);
+
+			PostsOfClub postsOfClub = new PostsOfClub();
+
+			postsOfClub.setPostsOfClub(posts);
+
+			RemindersOfStudent remindersOfStudent = new RemindersOfStudent(CNE,
+					this.daoReminderImp.getStudentReminder(CNE));
+
+			// Variables for number of reminders and number of notifications
+			int nbrNotifications = allNotifications.getNotificationsList().size();
+			int nbrReminders = remindersOfStudent.getReminders().size();
+			int nbrJoinedClubs = clubIds.size();
+
+			request.setAttribute("nbrNotifications", nbrNotifications);
+			request.setAttribute("nbrReminders", nbrReminders);
+			request.setAttribute("nbrJoinedClubs", nbrJoinedClubs);
+
+			request.setAttribute("posts", postsOfClub.getPostsOfClub());
+
+			request.setAttribute("likedPosts", likedPostsIds);
+
+			request.setAttribute("allComments", allComments.getAllComments());
+
+			request.setAttribute("reminders", remindersOfStudent.getReminders());
+
+			request.setAttribute("notifications", allNotifications.getNotificationsList());
+
+			request.getServletContext().getRequestDispatcher("/WEB-INF/JSP/Profile.jsp").forward(request, response);
+		} else {
+			response.sendRedirect("/LinkedClubs/Login");
 		}
-		
-		
-		// Getting all the comments, and then we'll check for each post and its comments in the jsp !!
-		AllComments allComments = new AllComments(this.daoCommentImp.getAllComments());
-		
-		//Getting all the notification correspond to a student
-		AllNotification allNotifications = new AllNotification(this.daoNotificationImp.getAll(CNE));
 
-		// Getting the lines in clubsmembers table related with the current student
-		ArrayList<ClubsMembers> clubIds = this.daoJoinClubImp.readClubs(CNE);
-		
-		ArrayList<Post> posts = new ArrayList<Post>();
-
-		for (ClubsMembers clubsMembers : clubIds) {
-
-			posts.addAll(this.daoPostImp.getPosts(clubsMembers.getClubId()));
-
-		}
-
-		Collections.shuffle(posts);
-		
-		PostsOfClub postsOfClub = new PostsOfClub();
-
-		postsOfClub.setPostsOfClub(posts);
-		
-		RemindersOfStudent remindersOfStudent = new RemindersOfStudent(CNE, this.daoReminderImp.getStudentReminder(CNE));
-
-		//Variables for number of reminders and number of notifications
-		int nbrNotifications= allNotifications.getNotificationsList().size();
-		int nbrReminders= remindersOfStudent.getReminders().size();
-				
-		request.setAttribute("nbrNotifications", nbrNotifications);
-		request.setAttribute("nbrReminders", nbrReminders);
-		
-		request.setAttribute("posts", postsOfClub.getPostsOfClub());
-
-		request.setAttribute("likedPosts", likedPostsIds);
-		
-		request.setAttribute("allComments", allComments.getAllComments());
-		
-		request.setAttribute("reminders", remindersOfStudent.getReminders());
-		
-		request.setAttribute("notifications", allNotifications.getNotificationsList());
-		
-		
-
-		request.getServletContext().getRequestDispatcher("/WEB-INF/JSP/Profile.jsp").forward(request, response);
 	}
 
 	/**

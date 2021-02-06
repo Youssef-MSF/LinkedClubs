@@ -156,16 +156,17 @@ public class DaoJoinClubImp implements DaoJoinClub {
 		Session session = HibernateUtil.openSession();
 		try {
 			session.beginTransaction();
-			
+
 			@SuppressWarnings("unchecked")
 			ArrayList<ClubsMembers> clubsMembersList = (ArrayList<ClubsMembers>) session
 					.createSQLQuery("SELECT * FROM clubsmembers WHERE CNE='" + clubsMembers.getCNE() + "' AND clubId='"
 							+ clubsMembers.getClubId() + "'")
 					.addEntity(ClubsMembers.class).list();
-			
+
 			System.out.println(clubsMembersList.isEmpty());
-			
+
 			if (clubsMembersList.isEmpty()) {
+
 				session.save(clubsMembers);
 				session.getTransaction().commit();
 				return clubsMembers;
@@ -174,6 +175,26 @@ public class DaoJoinClubImp implements DaoJoinClub {
 			session.getTransaction().rollback();
 			// TODO: handle exception
 		}
+		return null;
+	}
+
+	@Override
+	public ArrayList<ClubsMembers> getAll() {
+		Session session = HibernateUtil.openSession();
+		session.beginTransaction();
+		try {
+			@SuppressWarnings("unchecked")
+			ArrayList<ClubsMembers> allClubsMembers = (ArrayList<ClubsMembers>) session
+					.createSQLQuery("SELECT * FROM clubsmembers").addEntity(ClubsMembers.class).list();
+			session.getTransaction().commit();
+
+			return allClubsMembers;
+
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			e.printStackTrace();
+		}
+
 		return null;
 	}
 

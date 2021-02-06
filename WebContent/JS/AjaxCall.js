@@ -108,8 +108,18 @@ const joinClub = (event) => {
  const clubId = joinBtn.getAttribute("data-clubId");
  const path = "http://localhost:8080/LinkedClubs/HandleJoinClub";
  const params = "clubId=" + clubId;
- ajaxCall(path, undefined, undefined, params);
+ ajaxCall(path, () => changeJoinStatus(), undefined, params);
 };
+
+// changeJoinStatus function
+const changeJoinStatus = () => {
+
+	const joinedStatus = document.getElementById('joinedStatus');
+	joinedStatus.style.display="block";	
+	
+	joinClubBtn.style.display="none";	
+
+}
 
 //Increment and decrement nbr of likes
 const nbrLikes = (isTrue) => {
@@ -149,10 +159,10 @@ const addNotification=(event)=>{
 	const eventBtn=event.target;
 	const title=eventBtn.getAttribute("data-title");
 	const date=eventBtn.getAttribute("data-date");
-	const postId=eventBtn.getAttribute("data-postId");
+	const notificationId=eventBtn.getAttribute("data-notificationId");
 	const isClicked=eventBtn.getAttribute("data-clicked");	
 	const path="http://localhost:8080/LinkedClubs/HandleNotification";
-	const params="title="+title+"&date="+date+"&isClicked="+isClicked+"&postId="+postId;
+	const params="title="+title+"&date="+date+"&isClicked="+isClicked+"&notificationId="+notificationId;
 	if(!JSON.parse(isClicked)) ajaxCall(path, () => appendNotification(eventBtn,title,date), undefined, params);
 };
 const appendNotification=(btn,title,date)=>{

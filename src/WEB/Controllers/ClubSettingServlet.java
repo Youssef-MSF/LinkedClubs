@@ -67,7 +67,7 @@ public class ClubSettingServlet extends HttpServlet {
 			response.sendRedirect("/LinkedClubs/ProfileClub");
 		}else {
 			request.setAttribute("errClubSetting", clubSettingForm.getErr());
-			request.getServletContext().getNamedDispatcher("/WEB-INF/JSP/ProfileClub.jsp").forward(request, response);
+			request.getServletContext().getRequestDispatcher("/WEB-INF/JSP/ProfileClub.jsp").forward(request, response);
 		}
 		
 	}

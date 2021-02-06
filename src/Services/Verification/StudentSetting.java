@@ -86,10 +86,12 @@ public class StudentSetting {
 		try {
 			if (err.isEmpty()) {
 				// Update student in the dataBase
-				profileImagePart.write(profileImagesUploadDirectory + File.separator + profileImage);
-				coverImagePart.write(coverImagesUploadDirectory + File.separator + coverImage);
-				
-				System.out.println("hh");
+				if (!profileImage.isEmpty()) {
+					profileImagePart.write(profileImagesUploadDirectory + File.separator + profileImage);
+				}
+				if (!coverImage.isEmpty()) {
+					coverImagePart.write(coverImagesUploadDirectory + File.separator + coverImage);
+				}
 				
 				try {
 					
@@ -101,10 +103,8 @@ public class StudentSetting {
 					
 				} catch (Exception e) {
 					// TODO: handle exception
-					System.out.println("Fuck : " + e.getMessage());
+					System.out.println(e.getMessage());
 				}
-				
-				System.out.println("hh");
 
 			} else {
 				throw new Exception("Update has failed!!");
@@ -223,27 +223,11 @@ public class StudentSetting {
 	public void verifyProfileImg(String profileImage, Student student) {
 		// Setting student major
 		student.setProfileImage(profileImage);
-
-		try {
-			if (profileImage.isEmpty())
-				throw new Exception("Please insert a valid profile image");
-		} catch (Exception e) {
-			// TODO: handle exception
-			err.put("errbio", e.getMessage());
-		}
 	}
 
 	public void verifyCoverImg(String backgroundImage, Student student) {
 		// Setting student major
 		student.setCoverImage(backgroundImage);
-
-		try {
-			if (backgroundImage.isEmpty())
-				throw new Exception("Please insert a valid cover image");
-		} catch (Exception e) {
-			// TODO: handle exception
-			err.put("errbio", e.getMessage());
-		}
 	}
 
 }

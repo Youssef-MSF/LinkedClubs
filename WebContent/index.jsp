@@ -12,6 +12,8 @@
 <link rel="stylesheet" type="text/css" href="CSS/styles.css" />
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
+<link rel="icon" href="/LinkedClubs/Images/LCbg.png" type="image/icon type">
+
 <title>LinkedClubs</title>
 
 <style>
@@ -96,18 +98,24 @@ main div:nth-of-type(2) img {
 					We are the link between you, your school<br> and your clubs. <br>
 					Join us and be part of our online <br> extracurricular.
 				</p>
-				<a href="/LinkedClubs/Login"
-					class="py-6 px-16 font-bold my-6 text-center main-bg-color shadow-lg text-white">Log
+				<div>
+				
+					<a href="/LinkedClubs/Login"
+					class="py-6 px-10 font-bold my-6 text-center border-2 main-border-color main-bg-color shadow-lg text-white">Log
 					in</a>
+					
+					<a href="/LinkedClubs/Signup"
+					class="py-6 px-10 font-bold my-6 text-center border-2 main-border-color main-color shadow-lg">Sign up</a>
+				
+				</div>
 			</section>
 			<section class="m-10">
 				<h2 class="text-xl font-bold text-gray-700">For Clubs</h2>
 				<p class="text-gray-500 py-6 mb-6">
 					<br><br><br><br>
 				</p>
-				<a href="/LinkedClubs/Signup"
-					class="py-6 px-16 font-bold text-center shadow-lg border-2 main-border-color main-color">Sign
-					up</a>
+				<a href="/LinkedClubs/ClubLogin"
+					class="py-6 px-10 font-bold text-center shadow-lg border-2 main-border-color main-color">Login for club</a>
 			</section>
 		</div>
 	</div>

@@ -17,7 +17,7 @@ public class DaoClubImp implements DaoClub {
 	}
 
 	public Club add(Club club) {
-		Session session=HibernateUtil.openSession();
+		Session session = HibernateUtil.openSession();
 		try {
 			session.beginTransaction();
 			session.save(club);
@@ -99,28 +99,52 @@ public class DaoClubImp implements DaoClub {
 
 		return null;
 	}
-	
+
 	// Method for getting club images
-	
-	public static ArrayList<Club> getClubImages(){
-		Session session=HibernateUtil.openSession();
+
+	public static ArrayList<Club> getClubImages() {
+		Session session = HibernateUtil.openSession();
 		session.beginTransaction();
 		try {
 			@SuppressWarnings("unchecked")
-			ArrayList<Club> clubImages = (ArrayList<Club>) session.createSQLQuery("SELECT * FROM club").addEntity(Club.class).list();
+			ArrayList<Club> clubImages = (ArrayList<Club>) session.createSQLQuery("SELECT * FROM club")
+					.addEntity(Club.class).list();
 			System.out.println("worked");
 			session.getTransaction().commit();
-			
-			//System.out.println("POSTS ---> " + clubImages.get(0));
-			
+
+			// System.out.println("POSTS ---> " + clubImages.get(0));
+
 			return clubImages;
-			
-		}catch(Exception e) {
+
+		} catch (Exception e) {
 			session.beginTransaction().rollback();
 			e.printStackTrace();
 		}
-		
+
 		return null;
+	}
+
+	@Override
+	public Club updateNumberOfMembers(Club club) {
+		// TODO Auto-generated method stub
+		Session session = HibernateUtil.openSession();
+		try {
+			session.beginTransaction();
+			Club clb = find(club.getClubId());
+			
+			clb.setMembersNumber(club.getMembersNumber() + 1);
+
+			session.update(clb);
+
+			session.getTransaction().commit();
+
+			return clb;
+		} catch (Exception e) {
+			// TODO: handle exception
+			session.getTransaction().rollback();
+		}
+		// TODO Auto-generated method stub
+		return club;
 	}
 
 }

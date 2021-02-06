@@ -16,13 +16,12 @@
 
 <body>
     <main>
-        <form action="ClubLogin" method="post">
-            <h2>Sign in to your club</h2>
-            <h2 style="color: red;">${err.get("errLogin")}</h2>
+        <form action="adminLogin" method="post">
+            <h2>Sign in for LinkedClubs administration panel</h2>
             <span></span>
-            <label for="">Club ID :</label>
-            <input type="text" name="clubId" id="cne" placeholder="Insert your CNE">
-            <span class="err">${err.get("errCNE")}</span>
+            <label for="">Username :</label>
+            <input type="text" name="username" id="cne" placeholder="Username">
+            <span class="err">${err.get("errUsername")}</span>
             <label for="">Password:</label>
             <input type="password" name="password" placeholder="Insert your password">
             <span class="err">${err.get("errPassword")}</span>

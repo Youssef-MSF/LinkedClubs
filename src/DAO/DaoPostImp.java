@@ -163,5 +163,28 @@ public class DaoPostImp implements DaoPost{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+public ArrayList<Post> getAllPosts() {
+		
+		Session session=HibernateUtil.openSession();
+		session.beginTransaction();
+		try {
+			@SuppressWarnings("unchecked")
+			ArrayList<Post> postsOfClub = (ArrayList<Post>) session.createSQLQuery("SELECT * FROM post").addEntity(Post.class).list();
+			session.getTransaction().commit();
+			
+			//System.out.println("POSTS ---> " + postsOfClub.get(1).getPostDescription());
+			
+			return postsOfClub;
+			
+		}catch(Exception e) {
+			session.beginTransaction().rollback();
+			e.printStackTrace();
+		}
+		
+		return null;
+		
+	}
 	
 }

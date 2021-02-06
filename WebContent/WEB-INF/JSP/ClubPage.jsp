@@ -15,32 +15,18 @@
 <link rel="stylesheet" type="text/css"
 	href="/LinkedClubs/CSS/ProfileClub2.css" media="screen" />
 
+<link rel="stylesheet"
+	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+	crossorigin="anonymous" />
+
 <title>Profile Club</title>
+
+<link rel="icon" href="/LinkedClubs/Images/LCbg.png" type="image/icon type">
+
 </head>
 <body>
-
-	<nav id="navBar">
-		<main>
-			<a href="/LinkedClubs">LinkedClubs</a>
-			<button>
-				<input type="text" placeholder="search"> <i
-					class="fab fa-searchengin"></i>
-			</button>
-			<div>
-				<button id="notificationBtn">
-					<i class="fas fa-sticky-note"></i>
-				</button>
-				<span>63</span>
-				<button>
-					<i class="fas fa-bell"></i>
-				</button>
-				<span>63</span> <img
-					src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.student.image}"/>"
-					alt="profile picture"> <span id="fullName"><c:out
-						value="${sessionScope.student.fullName}" /></span>
-			</div>
-		</main>
-	</nav>
+	<c:import url="navbar.jsp" />
 	<!----------------Personnal info sections--------------------->
 	<!----------------Personnal info sections--------------------->
 	<section id="personal__info"
@@ -56,13 +42,21 @@
 								value="${club.facebook}" /></span></li>
 					<li><i class="fab fa-instagram"></i><span><c:out
 								value="${club.instagram}" /></span></li>
-					<li><i class="fab fa-twitter"></i><span><c:out
-								value="${club.clubBio}" /></span></li>
 				</ul>
-				<button id="joinBtn" data-clubId="${ club.clubId }">Join Club</button>
+				<c:if test="${ sessionScope.student != null }">
+					<c:if test="${ !joinedClubs.contains(club.clubId) }">
+						<button id="joinBtn" data-clubId="${ club.clubId }">Join
+							Club</button>
+					</c:if>
+
+					<span id="joinedStatus" style="color: green; display: none;">Joined <i class="fas fa-check"></i></span>
+
+					<c:if test="${ joinedClubs.contains(club.clubId) }">
+						<span style="color: green;">Joined <i class="fas fa-check"></i></span>
+					</c:if>
+				</c:if>
 				<span>Members<span id="nbrClubsJoined"
-					style="color: #FF7556;"><c:out
-							value="${club.membersNumber}" /></span></span>
+					style="color: #FF7556;"><c:out value="${club.membersNumber}" /></span></span>
 			</div>
 		</main>
 	</section>
@@ -78,10 +72,6 @@
 	<!--------------Post && Reminder section----------------------->
 	<div id="posts__reminder">
 		<div id="reminder">
-			<section>
-				<span style="color: #FF7556; font-size: 1.5em">Reminder</span> <span
-					style="text-align: right;"><i class="fas fa-sticky-note"></i></span>
-			</section>
 			<section>
 
 
@@ -194,7 +184,9 @@
 
 				<div class="post event">
 					<header>
-						<a href="/LinkedClubs/clubs?clubId=<c:out value="${post.club.clubId}"/>" style="color: black; text-decoration: none;">
+						<a
+							href="/LinkedClubs/clubs?clubId=<c:out value="${post.club.clubId}"/>"
+							style="color: black; text-decoration: none;">
 
 							<div>
 								<img
@@ -212,9 +204,24 @@
 						</div>
 					</header>
 					<p>${ post.postDescription }</p>
-					<img
-						src="/LinkedClubs/Images/postFiles/<c:out value="${post.fileLink}"/>"
-						alt="picture">
+
+					<c:if test="${ !post.fileLink.isEmpty() }">
+
+						<c:if test="${ post.fileType.contains('image') }">
+							<img class="current_post_image"
+								src="/LinkedClubs/Images/postFiles/<c:out value="${post.fileLink}"/>"
+								alt="picture">
+						</c:if>
+
+						<c:if test="${ post.fileType.contains('pdf') }">
+
+							<embed style="width: 100%; height: 30em;"
+								src="/LinkedClubs/Images/postFiles/<c:out value="${post.fileLink}"/>" />
+
+						</c:if>
+
+					</c:if>
+
 					<header class="likes__comments">
 						<div>
 
@@ -263,166 +270,8 @@
 
 			</c:forEach>
 
-
-			<!---------------------Normal post without picture----------->
-			<div class="post event">
-				<header>
-					<div>
-						<img
-							src="/LinkedClubs/Images/profileImages/<c:out value="${club.image}"/>"
-							alt="profile image"> <span>
-							<li>zakaria najib</li>
-							<li>2h.</li>
-						</span>
-					</div>
-					<div>
-						<li name="numberLikes">36</li>
-						<li><i class="fas fa-star"></i></li>
-					</div>
-				</header>
-				<p>You’ve heard tons about coding and know that it has to do
-					with computers and how they process the information we see.and how
-					they process the information we see.</p>
-				<header class="likes__comments">
-					<div>
-						<button name="likesBtn">
-							<i class="fas fa-star"></i> like
-						</button>
-						<button name="commentsBtn">
-							<i class="fas fa-comment-alt"></i> comment
-						</button>
-					</div>
-					<div>
-						<li name="numberComments">23</li>
-						<li>comments</li>
-					</div>
-				</header>
-				<section class="comments">
-					<main>
-						<div>
-							<img
-								src="/LinkedClubs/Images/clubProfileImages/<c:out value="${club.image}"/>"
-								alt="profile picture"> <span>wowo that's uncridable
-								!!</span>
-						</div>
-						<div>
-							<img
-								src="/LinkedClubs/Images/clubProfileImages/<c:out value="${club.image}"/>"
-								alt="profile picture"> <span>that's amazing keep
-								going !!</span>
-						</div>
-						<div>
-							<img
-								src="/LinkedClubs/Images/clubProfileImages/<c:out value="${club.image}"/>"
-								alt="profile picture"> <span>wowo that's
-								uncridable!!</span>
-						</div>
-						<div>
-							<img
-								src="/LinkedClubs/Images/clubProfileImages/<c:out value="${club.image}"/>"
-								alt="profile picture"> <span>wowo that's
-								uncridable!!</span>
-						</div>
-					</main>
-					<form>
-						<button name="publishBtn">Publish</button>
-						<input type="text" name="commentInput"
-							placeholder="Write a comment...">
-					</form>
-				</section>
-			</div>
-			<!--------------------Post of type Event-------------------------------->
-			<div class="post event">
-				<header>
-					<div>
-						<img src="../Images/profileImage.jpg" alt="profile image"> <span>
-							<li>zakaria najib</li>
-							<li>2h.</li>
-						</span>
-					</div>
-					<div>
-						<li name="numberLikes">36</li>
-						<li><i class="fas fa-star"></i></li>
-					</div>
-				</header>
-				<p>You’ve heard tons about coding and know that it has to do
-					with computers and how they process the information we see.and how
-					they process the information we see.</p>
-				<img src="../Images/webDesign.jpg" alt="profile image">
-				<header class="likes__comments">
-					<div>
-						<button name="likesBtn">
-							<i class="fas fa-star"></i> like
-						</button>
-						<button name="commentsBtn">
-							<i class="fas fa-comment-alt"></i> comment
-						</button>
-						<button name="ticketBtn">
-							<i class="fas fa-scroll"></i> ticket
-						</button>
-					</div>
-					<div>
-						<li name="numberComments">23</li>
-						<li>comments</li>
-					</div>
-				</header>
-				<section class="comments">
-					<main>
-						<div>
-							<img src="../Images/profileImage.jpg" alt="profile picture">
-							<span>wowo that's uncridable !!</span>
-						</div>
-						<div>
-							<img src="../Images/profileImage.jpg" alt="profile picture">
-							<span>that's amazing keep going !!</span>
-						</div>
-						<div>
-							<img src="../Images/profileImage.jpg" alt="profile picture">
-							<span>wowo that's uncridable!!</span>
-						</div>
-						<div>
-							<img src="../Images/profileImage.jpg" alt="profile picture">
-							<span>wowo that's uncridable!!</span>
-						</div>
-						<div>
-							<img src="../Images/profileImage.jpg" alt="profile picture">
-							<span>wowo that's uncridable!!</span>
-						</div>
-						<div>
-							<img src="../Images/profileImage.jpg" alt="profile picture">
-							<span>wowo that's uncridable!!</span>
-						</div>
-						<div>
-							<img src="../Images/profileImage.jpg" alt="profile picture">
-							<span>wowo that's uncridable!!</span>
-						</div>
-						<div>
-							<img src="../Images/profileImage.jpg" alt="profile picture">
-							<span>wowo that's uncridable!!</span>
-						</div>
-						<div>
-							<img src="../Images/profileImage.jpg" alt="profile picture">
-							<span>wowo that's uncridable!!</span>
-						</div>
-						<div>
-							<img src="../Images/profileImage.jpg" alt="profile picture">
-							<span>wowo that's uncridable!!</span>
-						</div>
-						<div>
-							<img src="../Images/profileImage.jpg" alt="profile picture">
-							<span>wowo that's uncridable!!</span>
-						</div>
-					</main>
-					<form>
-						<button name="publishBtn">Publish</button>
-						<input type="text" name="commentInput"
-							placeholder="Write a comment...">
-					</form>
-				</section>
-			</div>
 		</div>
 	</div>
-
 	<!--------------------About Club-------------------------------->
 	<div id="About__container" style="display: none;">
 
@@ -443,20 +292,18 @@
 						<h3>Club Name :</h3>
 						<h2
 							style="padding-right: 50px; font-family: cursive; color: rgb(55, 55, 56);">
-							<i>APPSCLUB</i>
+							<i>${ club.clubName }</i>
 						</h2>
 					</div>
 					<br />
 					<div class="content">
 						<h3>Description :</h3>
-						<p>lsjdsdsjdfksdfhksdf ksjefksdefken dkqhdksqhdfksfhksd
-							sjfhusdf hfuisdqfufhihus sksqjhdksufhis khsdfusdgfujgdsuygfkfjds
-							jugdusyfudhfjsdbn</p>
+						<p>${ club.clubBio }</p>
 					</div>
 					<br />
 					<div class="content">
-						<h3>Description :</h3>
-						<h2 style="padding-top: 5px;">60</h2>
+						<h3>Members :</h3>
+						<h2 style="padding-top: 5px;">${ club.membersNumber }</h2>
 					</div>
 				</div>
 
@@ -467,7 +314,7 @@
 
 	</div>
 
-	
+
 
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -478,40 +325,40 @@
 
 
 	<script>
-	
 		// Toggle post container
 		var update_post_container = document
 				.getElementById('update-post-container');
-		
+
 		// Get list of information
 		var post_ids = document.getElementsByClassName('current_post_id');
-		
-		var post_descriptions = document.getElementsByClassName('current_post_decription');
-		
+
+		var post_descriptions = document
+				.getElementsByClassName('current_post_decription');
+
 		var post_images = document.getElementsByClassName('current_post_image');
-		
+
 		// Get Inputs of update form
 		var input_id = document.getElementById('post-id');
-		
+
 		var input_description = document.getElementById('description');
-		
+
 		var input_image = document.getElementById('post-image');
-		
+
 		var input_file = document.getElementById('file_input');
 
 		// Toggle function
 		function toggle_update_post(index) {
-			
+
 			console.log(typeof index);
-			
+
 			update_post_container.classList.toggle("hide-post-update");
-			
-			input_id.value = post_ids[index].value ;
+
+			input_id.value = post_ids[index].value;
 			input_description.value = post_descriptions[index].textContent;
-			input_image.src = post_images[index].src ;
-			
-			input_file.value = post_images[index].src ;
-			
+			input_image.src = post_images[index].src;
+
+			input_file.value = post_images[index].src;
+
 		}
 	</script>
 

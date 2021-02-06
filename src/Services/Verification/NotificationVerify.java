@@ -27,29 +27,46 @@ public class NotificationVerify {
 	}
 	public NotificationVerify() {}
 	
-	//Main Function
+	//Main Functions
+	// Function handling get the ticket by a student
 	public Notification notificatinFct(HttpServletRequest request) {
 			//Getting parameters
-			 String title=request.getParameter("title");
-			 String date=request.getParameter("date");
-			 String postId=request.getParameter("postId");
+			 int notificationId=Integer.parseInt(request.getParameter("notificationId"));
 
 			Notification notification=new Notification();
 			//Getting the id of the student to idStudent notification
 			HttpSession session=request.getSession();
 			Student student=(Student) session.getAttribute("student");
+			
 			notification.setIdStudent(student.getCNE());
-			notification.setDate(date);
-			notification.setTitle(title);
-			//Getting the post to set notification field
-			System.out.println("post id "+Integer.parseInt(postId));
-			Post post=this.daoPostImp.find(Integer.parseInt(postId));
-			post.setNotification(notification);
+			notification.setId(notificationId);
+			
 			//Insert notification to data base
-			this.daoNotificationImp.add(notification);
-			//updating the post for notification field
-			Post pstPost =this.daoPostImp.updateNotification(post);
+			this.daoNotificationImp.update(notification);
+			
 			return notification;
+	}
+	
+	// Add notification verification function
+	public Notification notificationVerify(HttpServletRequest request) {
+		
+		//Getting parameters
+		 String title=request.getParameter("title");
+		 String date=request.getParameter("date");
+		 
+		 if (!(title.isEmpty() || date.isEmpty())) {
+			
+			 Notification notification = new Notification();
+			 notification.setDate(date);
+			 notification.setTitle(title);
+			 
+			 this.daoNotificationImp.add(notification);
+			 
+			 return notification;
+			 
+		}
+		
+		return null;
 	}
 	
 }

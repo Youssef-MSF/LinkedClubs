@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import DAO.UTIL.HibernateUtil;
 import Services.Entities.Comment;
 import Services.Entities.Notification;
+import Services.Entities.Post;
 
 public class DaoNotificationImp implements DaoNotification {
 
@@ -32,7 +33,7 @@ public class DaoNotificationImp implements DaoNotification {
 		session.beginTransaction();
 		try {
 			@SuppressWarnings("unchecked")
-			ArrayList<Notification> getAllNotifications = (ArrayList<Notification>) session.createSQLQuery("SELECT * FROM notification WHERE idStudent='"+cne+"'").addEntity(Notification.class).list();
+			ArrayList<Notification> getAllNotifications = (ArrayList<Notification>) session.createSQLQuery("SELECT * FROM notification WHERE idStudent='"+cne+"' ORDER BY id DESC").addEntity(Notification.class).list();
 			session.getTransaction().commit();
 			
 			return getAllNotifications;
@@ -42,6 +43,28 @@ public class DaoNotificationImp implements DaoNotification {
 			e.printStackTrace();
 		}
 		
+		return null;
+	}
+
+	@Override
+	public Notification update(Notification notification) {
+		Session session=HibernateUtil.openSession();
+		try {
+			session.beginTransaction();
+			Notification ntf = session.get(Notification.class, notification.getId());
+			
+			ntf.setIdStudent(notification.getIdStudent());
+			
+			
+			session.update(ntf);
+			
+			session.getTransaction().commit();	
+			
+			return ntf;
+		} catch (Exception e) {
+			// TODO: handle exception
+			session.getTransaction().rollback();
+		}
 		return null;
 	}
 

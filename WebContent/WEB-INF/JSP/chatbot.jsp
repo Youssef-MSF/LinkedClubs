@@ -9,7 +9,7 @@
 				</p>
 			</div>
 			<button type="button" id="closeBtn" style="outline: none;"
-				class="mx-2 top-0 text-white">X</button>
+				class="mx-2 top-0 text-white"><i class="fas fa-times"></i></button>
 		</header>
 		<hr>
 		<section id="messageContainer" class="overflow-y-scroll h-64">

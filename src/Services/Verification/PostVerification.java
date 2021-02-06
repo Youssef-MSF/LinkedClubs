@@ -15,19 +15,24 @@ import javax.servlet.http.Part;
 
 import org.hibernate.Session;
 
+import DAO.DaoNotification;
 import DAO.DaoPost;
 import DAO.DaoPostImp;
 import Services.Entities.Club;
+import Services.Entities.Notification;
 import Services.Entities.Post;
 
 public class PostVerification {
 	//Variables
 	private HashMap<String, String> err=new HashMap<String, String>();
 	private DaoPost daoPostImp;
+	private DaoNotification daoNotificationImp;
 	
 	//Constructors
-	public PostVerification(DaoPost daoPostImp) {
+	public PostVerification(DaoPost daoPostImp, DaoNotification daoNotificationImp) {
 		this.daoPostImp=daoPostImp;
+		this.daoNotificationImp = daoNotificationImp;
+		
 	}
 	
 	//Verification function
@@ -49,8 +54,13 @@ public class PostVerification {
 		String postDescription=(String) request.getParameter("description");
 		String postFileLink=(String) postImagePart.getSubmittedFileName();
 		
+		// Get the notification
+		NotificationVerify notificationVerifyForm = new NotificationVerify(this.daoNotificationImp, this.daoPostImp);
+		Notification notification = notificationVerifyForm.notificationVerify(request);
+		
 		//Create post object
 		Post post=new Post();
+		
 		
 		//Call verification functions
 		verifyPostDescription(postDescription, post);
@@ -59,12 +69,19 @@ public class PostVerification {
 		HttpSession session = request.getSession();
 		Club club = (Club) session.getAttribute("club");
 		
+		
 		post.setClub(club);
 		
 		if(err.isEmpty()) {
-			postImagePart.write(profileImagesUploadDirectory + File.separator + postFileLink);
+			if (!(postFileLink.equals(""))) {
+				postImagePart.write(profileImagesUploadDirectory + File.separator + postFileLink);
+			}
 			//Setting the date of the post
 			post.setPublishedDate(new java.util.Date());
+			
+			// Set the notification to the post
+			post.setNotification(notification);
+			
 			//Inserting the post in the dataBase
 			post=this.daoPostImp.add(post);
 		}

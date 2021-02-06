@@ -15,7 +15,104 @@
 <link rel="stylesheet" type="text/css"
 	href="/LinkedClubs/CSS/ProfileClub2.css" media="screen" />
 
+<link rel="stylesheet"
+	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+	crossorigin="anonymous" />
+
+
 <title>Profile Club</title>
+
+<link rel="icon" href="/LinkedClubs/Images/LCbg.png"
+	type="image/icon type">
+
+<style>
+#create_post_form {
+	width: 100%;
+	background-color: #FFFAFA;
+	padding: 20px 10px;
+	box-sizing: border-box;
+	margin-bottom: 20px;
+}
+
+#create_post_form div {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+#create_post_form img {
+	width: 50px;
+	height: 50px;
+	border-radius: 100px;
+}
+
+#create_post_form div input {
+	width: 100%;
+	border-radius: 10px;
+	padding: 10px 10px;
+	margin-left: 10px;
+	background-color: #f1ebebc9;
+	border: none;
+	outline: none;
+	color: black;
+}
+
+#is_event_span {
+	width: 60px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#is_event_span label {
+	display: block;
+}
+
+#create_post_form section div label {
+	width: 60px;
+	display: flex;
+	justify-content: center;
+}
+
+#create_post_form section div label i {
+	color: rgb(243, 121, 65);
+}
+
+#create_post_form section div {
+	margin-bottom: 20px;
+}
+
+#create_post_form section {
+	margin-top: 20px;
+	display: none;
+}
+
+#add_post_btn {
+	width: 100%;
+	padding: 10px 0px;
+	border: none;
+	outline: none;
+	transition-duration: 200ms;
+	background-color: #cacaca;
+	font-weight: bolder;
+}
+
+#add_post_btn:hover {
+	background-color: rgb(243, 121, 65);
+	color: white;
+}
+
+#update-post-container {
+	position: fixed;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.795);
+	z-index: 2;
+}
+</style>
+
 </head>
 <body>
 
@@ -27,20 +124,59 @@
 					class="fab fa-searchengin"></i>
 			</button>
 			<div>
-				<button id="notificationBtn">
-					<i class="fas fa-sticky-note"></i>
-				</button>
-				<span>63</span>
-				<button>
-					<i class="fas fa-bell"></i>
-				</button>
-				<span>63</span> <img
+				<img
 					src="/LinkedClubs/Images/clubProfileImages/<c:out value="${sessionScope.club.image}"/>"
 					alt="profile picture"> <span id="fullName"><c:out
 						value="${sessionScope.club.clubName}" /></span>
 			</div>
+
+			<form action="Logout" method="post">
+
+				<button type="submit" style="color: white; display: block;">
+					<i class="fas fa-sign-out-alt"></i>
+				</button>
+
+			</form>
+
 		</main>
 	</nav>
+
+
+	<!--  Update post form  -->
+
+	<div id="update-post-container" class="hide-post-update">
+
+		<form action="UpdatePost" method="post" enctype="multipart/form-data">
+
+			<div style="display: flex; width: 100%;">
+
+				<div id="img_update">
+
+					
+
+				</div>
+
+				<div id="img_btn">
+
+					<button onclick="closePopUp();" type="button" id="closeBtn"
+						style="outline: none;" class="mx-2 top-0 text-white">
+						<i class="fas fa-times"></i>
+					</button>
+
+				</div>
+
+			</div>
+
+			<input type="text" name="description" id="description"
+				placeholder="Description"><br> <input type="text"
+				name="post_id" id="post-id" value="" hidden> <input
+				type="file" name="fileLink" id="file_input"><br> <input
+				id="update_post" type="submit" value="Update">
+
+		</form>
+
+	</div>
+
 	<!----------------Personnal info sections--------------------->
 	<!----------------Personnal info sections--------------------->
 	<section id="personal__info"
@@ -56,8 +192,6 @@
 								value="${sessionScope.club.facebook}" /></span></li>
 					<li><i class="fab fa-instagram"></i><span><c:out
 								value="${sessionScope.club.instagram}" /></span></li>
-					<li><i class="fab fa-twitter"></i><span><c:out
-								value="${sessionScope.club.clubBio}" /></span></li>
 				</ul>
 				<span>Members<span id="nbrClubsJoined"
 					style="color: #FF7556;"><c:out
@@ -78,10 +212,11 @@
 	</nav>
 	<!--------------Post && Reminder section----------------------->
 	<div id="posts__reminder">
+
 		<div id="reminder">
 			<section>
-				<span style="color: #FF7556; font-size: 1.5em">Reminder</span> <span
-					style="text-align: right;"><i class="fas fa-sticky-note"></i></span>
+				<span style="color: #FF7556; font-size: 1.5em">Calendar</span> <span
+					style="text-align: right;"><i class="far fa-calendar-alt"></i></span>
 			</section>
 			<section>
 
@@ -174,46 +309,53 @@
 		<div id="posts">
 			<!---------------------Normal post with picture----------->
 
-			<div class="messageSender">
+			<form method="post" action="ProfileClub" id="create_post_form"
+				enctype="multipart/form-data">
+
+				<div>
+
+					<img
+						src="/LinkedClubs/Images/clubProfileImages/<c:out value="${sessionScope.club.image}"/>">
+
+					<input type="text" name="description"
+						placeholder="Write your post description ..."> <span
+						style="color: red;">${err.get("errPost")}</span>
+
+				</div>
+
+				<div>
+
+					<span id="is_event_span"><label>Event</label><input
+						style="margin: 0px;" type="checkbox" name="check"
+						onclick="showInputs();" id="check_input"></span> <input
+						type="file" name="postFile">
 
 
-				<img
-					src="/LinkedClubs/Images/clubProfileImages/<c:out value="${sessionScope.club.image}"/>"
-					alt="profile image">
+				</div>
 
-				<form action="ProfileClub" method="post"
-					enctype="multipart/form-data">
+				<section id="event_inputs">
 
-					<input class="messageSender__input" name="description" type="text"
-						placeholder="your post here :)"> <label for="real_file">Chose
-						file</label>
-					<!-- <button type="button" id="custom_button"><i class="fas fa-search"></i></button> -->
-					<span id="custom_text">No image chosen</span>&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="file" name="postFile" id="real_file" hidden="hidden">
-					<button type="submit">Post</button>
-					<span style="color: red;">${err.get("errPost")}</span>
+					<div>
 
-				</form>
+						<label><i class="far fa-calendar-alt"></i></label><input
+							type="datetime-local" name="date">
 
 
-			</div>
+					</div>
+					<div>
 
-			<div id="update-post-container" class="hide-post-update">
+						<label><i class="fas fa-clipboard"></i></label><input type="text"
+							placeholder="Event title" name="title">
 
-				<form action="UpdatePost" method="post"
-					enctype="multipart/form-data">
+					</div>
 
-					<img src="" width="100px" height="100px" id="post-image"><br>
+				</section>
 
-					<input type="text" name="description" id="description"
-						placeholder="Description"><br> <input type="text"
-						name="post_id" id="post-id" value=""> <input type="file"
-						name="fileLink" id="file_input"><br> <input
-						type="submit" value="Update">
+				<input id="add_post_btn" type="submit" value="Post">
 
-				</form>
+			</form>
 
-			</div>
+
 
 			<c:forEach items="${posts}" var="post" varStatus="status">
 
@@ -232,7 +374,7 @@
 							<li><button>
 									<i class="fas fa-cog" style="font-size: 20px;"
 										class="toggle-btn-update-post"
-										onclick="toggle_update_post(${ status.index })">${ status.index }</i>
+										onclick="toggle_update_post(${ status.index })"></i>
 								</button></li>
 							<li name="numberLikes">${ post.likeNumber }</li>
 
@@ -240,13 +382,30 @@
 						</div>
 
 						<input type="text" value="${ post.id }" class="current_post_id"
-							hidden>
+							hidden> <input type="text" value="${ post.fileType }"
+							class="current_post_fileType" hidden>
 
 					</header>
 					<p class="current_post_decription">${ post.postDescription }</p>
-					<img class="current_post_image"
-						src="/LinkedClubs/Images/postFiles/<c:out value="${post.fileLink}"/>"
-						alt="picture">
+
+					<c:if test="${ !post.fileLink.isEmpty() }">
+
+						<c:if test="${ post.fileType.contains('image') }">
+							<img class="current_post_file"
+								src="/LinkedClubs/Images/postFiles/<c:out value="${post.fileLink}"/>"
+								alt="picture">
+						</c:if>
+
+						<c:if test="${ post.fileType.contains('pdf') }">
+
+							<embed class="current_post_file"
+								style="width: 100%; height: 30em;"
+								src="/LinkedClubs/Images/postFiles/<c:out value="${post.fileLink}"/>" />
+
+						</c:if>
+
+					</c:if>
+
 					<header class="likes__comments">
 						<div>
 							<button name="commentsBtn">
@@ -260,195 +419,30 @@
 					</header>
 					<section class="comments">
 						<main>
-							<div>
-								<img
-									src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.club.image}"/>"
-									alt="profile picture"> <span>wowo that's
-									uncridable !!</span>
-							</div>
-							<div>
-								<img
-									src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.club.image}"/>"
-									alt="profile picture"> <span>that's amazing keep
-									going !!</span>
-							</div>
-							<div>
-								<img
-									src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.club.image}"/>"
-									alt="profile picture"> <span>wowo that's
-									uncridable!!</span>
-							</div>
-							<div>
-								<img
-									src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.club.image}"/>"
-									alt="profile picture"> <span>wowo that's
-									uncridable!!</span>
-							</div>
+
+							<c:forEach items="${allComments}" var="comment">
+
+								<c:if test="${ comment.post.id == post.id }">
+
+									<div>
+										<img
+											src="/LinkedClubs/Images/profileImages/<c:out value="${comment.student.profileImage}"/>"
+											alt="profile picture"> <span>${ comment.content }</span>
+									</div>
+
+								</c:if>
+
+							</c:forEach>
+
 						</main>
 					</section>
 				</div>
 
 			</c:forEach>
-
-
-			<!---------------------Normal post without picture----------->
-			<div class="post event">
-				<header>
-					<div>
-						<img
-							src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.club.image}"/>"
-							alt="profile image"> <span>
-							<li>zakaria najib</li>
-							<li>2h.</li>
-						</span>
-					</div>
-					<div>
-						<li name="numberLikes">36</li>
-						<li><i class="fas fa-star"></i></li>
-					</div>
-				</header>
-				<p>You’ve heard tons about coding and know that it has to do
-					with computers and how they process the information we see.and how
-					they process the information we see.</p>
-				<header class="likes__comments">
-					<div>
-						<button name="likesBtn">
-							<i class="fas fa-star"></i> like
-						</button>
-						<button name="commentsBtn">
-							<i class="fas fa-comment-alt"></i> comment
-						</button>
-					</div>
-					<div>
-						<li name="numberComments">23</li>
-						<li>comments</li>
-					</div>
-				</header>
-				<section class="comments">
-					<main>
-						<div>
-							<img
-								src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.club.image}"/>"
-								alt="profile picture"> <span>wowo that's uncridable
-								!!</span>
-						</div>
-						<div>
-							<img
-								src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.club.image}"/>"
-								alt="profile picture"> <span>that's amazing keep
-								going !!</span>
-						</div>
-						<div>
-							<img
-								src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.club.image}"/>"
-								alt="profile picture"> <span>wowo that's
-								uncridable!!</span>
-						</div>
-						<div>
-							<img
-								src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.club.image}"/>"
-								alt="profile picture"> <span>wowo that's
-								uncridable!!</span>
-						</div>
-					</main>
-					<form>
-						<button name="publishBtn">Publish</button>
-						<input type="text" name="commentInput"
-							placeholder="Write a comment...">
-					</form>
-				</section>
-			</div>
-			<!--------------------Post of type Event-------------------------------->
-			<div class="post event">
-				<header>
-					<div>
-						<img src="../Images/profileImage.jpg" alt="profile image"> <span>
-							<li>zakaria najib</li>
-							<li>2h.</li>
-						</span>
-					</div>
-					<div>
-						<li name="numberLikes">36</li>
-						<li><i class="fas fa-star"></i></li>
-					</div>
-				</header>
-				<p>You’ve heard tons about coding and know that it has to do
-					with computers and how they process the information we see.and how
-					they process the information we see.</p>
-				<img src="../Images/webDesign.jpg" alt="profile image">
-				<header class="likes__comments">
-					<div>
-						<button name="likesBtn">
-							<i class="fas fa-star"></i> like
-						</button>
-						<button name="commentsBtn">
-							<i class="fas fa-comment-alt"></i> comment
-						</button>
-						<button name="ticketBtn">
-							<i class="fas fa-scroll"></i> ticket
-						</button>
-					</div>
-					<div>
-						<li name="numberComments">23</li>
-						<li>comments</li>
-					</div>
-				</header>
-				<section class="comments">
-					<main>
-						<div>
-							<img src="../Images/profileImage.jpg" alt="profile picture">
-							<span>wowo that's uncridable !!</span>
-						</div>
-						<div>
-							<img src="../Images/profileImage.jpg" alt="profile picture">
-							<span>that's amazing keep going !!</span>
-						</div>
-						<div>
-							<img src="../Images/profileImage.jpg" alt="profile picture">
-							<span>wowo that's uncridable!!</span>
-						</div>
-						<div>
-							<img src="../Images/profileImage.jpg" alt="profile picture">
-							<span>wowo that's uncridable!!</span>
-						</div>
-						<div>
-							<img src="../Images/profileImage.jpg" alt="profile picture">
-							<span>wowo that's uncridable!!</span>
-						</div>
-						<div>
-							<img src="../Images/profileImage.jpg" alt="profile picture">
-							<span>wowo that's uncridable!!</span>
-						</div>
-						<div>
-							<img src="../Images/profileImage.jpg" alt="profile picture">
-							<span>wowo that's uncridable!!</span>
-						</div>
-						<div>
-							<img src="../Images/profileImage.jpg" alt="profile picture">
-							<span>wowo that's uncridable!!</span>
-						</div>
-						<div>
-							<img src="../Images/profileImage.jpg" alt="profile picture">
-							<span>wowo that's uncridable!!</span>
-						</div>
-						<div>
-							<img src="../Images/profileImage.jpg" alt="profile picture">
-							<span>wowo that's uncridable!!</span>
-						</div>
-						<div>
-							<img src="../Images/profileImage.jpg" alt="profile picture">
-							<span>wowo that's uncridable!!</span>
-						</div>
-					</main>
-					<form>
-						<button name="publishBtn">Publish</button>
-						<input type="text" name="commentInput"
-							placeholder="Write a comment...">
-					</form>
-				</section>
-			</div>
 		</div>
 	</div>
+
+	<!---------------------Normal post without picture----------->
 
 	<!--------------------Listes of members-------------------------------->
 
@@ -473,8 +467,10 @@
 					</div>
 
 					<form action="">
-						<input name="accept" type="button" value="Accept" class="btn1" data-studentId="${member.CNE}" />
-						<input name="decline" type="button" value="Decline" class="btn2" data-studentId="${member.CNE}" />
+						<input name="accept" type="button" value="Accept" class="btn1"
+							data-studentId="${member.CNE}" /> <input name="decline"
+							type="button" value="Decline" class="btn2"
+							data-studentId="${member.CNE}" />
 					</form>
 
 				</div>
@@ -495,7 +491,7 @@
 				<div class="left__cantainer" id="left__cantainer">
 
 					<img
-						src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.club.image}"/>"
+						src="/LinkedClubs/Images/clubProfileImages/<c:out value="${club.image}"/>"
 						alt="">
 
 				</div>
@@ -506,20 +502,18 @@
 						<h3>Club Name :</h3>
 						<h2
 							style="padding-right: 50px; font-family: cursive; color: rgb(55, 55, 56);">
-							<i>APPSCLUB</i>
+							<i>${ club.clubName }</i>
 						</h2>
 					</div>
 					<br />
 					<div class="content">
 						<h3>Description :</h3>
-						<p>lsjdsdsjdfksdfhksdf ksjefksdefken dkqhdksqhdfksfhksd
-							sjfhusdf hfuisdqfufhihus sksqjhdksufhis khsdfusdgfujgdsuygfkfjds
-							jugdusyfudhfjsdbn</p>
+						<p>${ club.clubBio }</p>
 					</div>
 					<br />
 					<div class="content">
-						<h3>Description :</h3>
-						<h2 style="padding-top: 5px;">60</h2>
+						<h3>Members :</h3>
+						<h2 style="padding-top: 5px;">${ club.membersNumber }</h2>
 					</div>
 				</div>
 
@@ -530,22 +524,23 @@
 
 	</div>
 
+	<!-- Club setting -->
 	<div id="Club_sett" style="display: none;">
-		<h1>Club Setting</h1>
 		<form action="ClubSetting" method="post" enctype="multipart/form-data">
-			<div class="form_container">
+			<div class="form_container" style="margin-top: 10px; height: auto;">
 
 				<div class="sett_info" id="general_info">
 
 
 					<div class="input-container">
-						<span>ClubName :</span> <input required type="text" name="ClubName"
-							class="input" value="<c:out value="${sessionScope.club.clubName}"/>" />
+						<span>ClubName :</span> <input required type="text"
+							name="ClubName" class="input"
+							value="<c:out value="${sessionScope.club.clubName}"/>" />
 
 					</div>
 					<div class="input-container">
-						<span>Password :</span> <input required type="password" name="password"
-							class="input"  />
+						<span>Password :</span> <input required type="password"
+							name="password" class="input" />
 
 
 					</div>
@@ -559,14 +554,16 @@
 
 					<div class="input-container">
 						<span>Facebook</span> <input required type="text" name="Facebook"
-							class="input" value="<c:out value="${sessionScope.club.facebook}"/>" />
+							class="input"
+							value="<c:out value="${sessionScope.club.facebook}"/>" />
 
 
 					</div>
 
 					<div class="input-container">
-						<span>Instagram</span> <input required type="text" name="Instagram"
-							class="input" value="<c:out value="${sessionScope.club.instagram}"/>" />
+						<span>Instagram</span> <input required type="text"
+							name="Instagram" class="input"
+							value="<c:out value="${sessionScope.club.instagram}"/>" />
 
 
 					</div>
@@ -588,7 +585,8 @@
 					</div>
 					<div class="input-container textarea">
 						<span id="sp_mess" style="padding-bottom: 6px;">ClubBio :</span>
-						<textarea name="ClubBio" class="input"><c:out value="${sessionScope.club.clubBio}"/></textarea>
+						<textarea name="ClubBio" class="input"><c:out
+								value="${sessionScope.club.clubBio}" /></textarea>
 
 
 					</div>
@@ -620,33 +618,61 @@
 		
 		var post_descriptions = document.getElementsByClassName('current_post_decription');
 		
-		var post_images = document.getElementsByClassName('current_post_image');
+		var post_files = document.getElementsByClassName('current_post_file');
+		
+		var post_fileType = document.getElementsByClassName('current_post_fileType');
 		
 		// Get Inputs of update form
 		var input_id = document.getElementById('post-id');
 		
 		var input_description = document.getElementById('description');
 		
-		var input_image = document.getElementById('post-image');
-		
 		var input_file = document.getElementById('file_input');
 
 		// Toggle function
 		function toggle_update_post(index) {
 			
-			console.log(typeof index);
+			update_post_container.style.display = "block";
 			
-			update_post_container.classList.toggle("hide-post-update");
+			console.log(post_fileType[index].value);
+			
+			//update_post_container.classList.toggle("hide-post-update");
 			
 			input_id.value = post_ids[index].value ;
 			input_description.value = post_descriptions[index].textContent;
-			input_image.src = post_images[index].src ;
 			
-			input_file.value = post_images[index].src ;
+			
+			// Check wether a post file is an image or pdf
+			if(post_fileType[index].value == 'application/pdf'){
+				
+				document.getElementById('img_update').innerHTML = '<embed src=' + post_files[index].src + ' width="100px" height="100px" >'
+				
+			}
+			
+			if(post_fileType[index].value.includes('image')){
+				
+				document.getElementById('img_update').innerHTML = '<img src=' + post_files[index].src + ' width="100px" height="100px" >'
+				
+			}
+		
 			
 		}
+		
+		// Function for displaying inputs for event post type
+		function showInputs(){
+	        if(document.getElementById("check_input").checked == true){
+	        	document.getElementById("event_inputs").style.display="block";
+	        	
+	        }else{
+	        	document.getElementById("event_inputs").style.display="none";
+	        }
+	    
+	    }
+		
+		// closePopUp function
+		function closePopUp(){
+			update_post_container.style.display = "none";
+		}
 	</script>
-
-
 </body>
 </html>

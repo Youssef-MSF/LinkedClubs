@@ -8,4 +8,5 @@ import antlr.collections.List;
 public interface DaoNotification {
 	public Notification add(Notification notification);
 	public ArrayList<Notification> getAll(String cne);
+	public Notification update(Notification notification);
 }

@@ -88,10 +88,12 @@ public class ClubSetting {
 				try {
 					if (err.isEmpty()) {
 						// Update student in the dataBase
-						clubImagePart.write(clubImagesUploadDirectory + File.separator + ClubImage);
-						coverImagePart.write(coverImagesUploadDirectory + File.separator + coverImage);
-						
-						System.out.println("hh");
+						if (!ClubImage.isEmpty()) {
+							clubImagePart.write(clubImagesUploadDirectory + File.separator + ClubImage);
+						}
+						if (!coverImage.isEmpty()) {
+							coverImagePart.write(coverImagesUploadDirectory + File.separator + coverImage);
+						}
 						
 						try {
 							
@@ -198,27 +200,11 @@ public void verifyClubBio(String ClubBio, Club club) {
 public void verifyCoverImg(String cover, Club club) {
 	// Setting student major
 	club.setCoverImage(cover);
-
-	try {
-		if (cover.isEmpty())
-			throw new Exception("Please insert a valid cover image");
-	} catch (Exception e) {
-		// TODO: handle exception
-		err.put("errCover", e.getMessage());
-	}
 }
 	
 public void verifyClubImg(String image, Club club) {
 	// Setting student major
 	club.setImage(image);
-
-	try {
-		if (image.isEmpty())
-			throw new Exception("Please insert a valid  image");
-	} catch (Exception e) {
-		// TODO: handle exception
-		err.put("errImg", e.getMessage());
-	}
 }
 
 }
