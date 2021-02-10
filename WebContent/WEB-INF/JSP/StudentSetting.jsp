@@ -46,7 +46,7 @@
             </div>
             <div>
                 <label for="Facebook">Facebook:</label>
-                <input type="text" id="Facebook" name="facebook" placeholder="Type your instagram" value="${sessionScope.student.facebook}">
+                <input type="text" id="Facebook" name="facebook" placeholder="Type your facebook" value="${sessionScope.student.facebook}">
 				<span class="err">${err.get("errFacebook")}</span>
             </div>
         </div>

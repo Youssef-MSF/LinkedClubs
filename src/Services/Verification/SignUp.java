@@ -60,6 +60,15 @@ public class SignUp {
 		verifyEmail(email, student);
 		verifyPassowrd(password1, password2, student);
 		verifyAcceptConditions(terms);
+		
+		// Add default profile images 
+		if (gender.equals("Male")) {
+			student.setImage("boy_profile_image.jpg");
+		}else {
+			student.setImage("girl_profile_image.jpg");
+		}
+		
+		student.setCoverImage("default_cover_image.jpg");
 
 		// Insert the new student into the dataBase
 		if (err.isEmpty()) {
@@ -69,6 +78,7 @@ public class SignUp {
 				try {
 					String hashedPassword = Hashing.generateStorngPasswordHash(password1);
 					student.setPassword(hashedPassword);
+					
 					this.daoStudentImp.add(student);
 				} catch (NoSuchAlgorithmException e) {
 					// TODO Auto-generated catch block

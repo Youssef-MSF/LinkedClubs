@@ -2,7 +2,14 @@
 
 <nav id="navBar">
 	<main>
-		<a href="home">LinkedClubs</a>
+		<c:if test="${ sessionScope.student != null }">
+			<a href="home">LinkedClubs</a>
+		</c:if>
+
+		<c:if test="${ sessionScope.student == null }">
+			<a href="./">LinkedClubs</a>
+		</c:if>
+
 		<button>
 			<input type="text" placeholder="search"> <i
 				class="fab fa-searchengin"></i>
@@ -25,7 +32,7 @@
 				<form action="Logout" method="post">
 
 					<button id="logout_btn" type="submit"
-						style="color: white; display: block; margin-left: 20px; @media screen and (max-width: 600px) {  margin-left: 0px;}}">
+						style="color: white; display: block; margin-left: 20px;">
 						<i class="fas fa-sign-out-alt"></i>
 					</button>
 

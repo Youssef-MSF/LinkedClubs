@@ -9,7 +9,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" type="text/css" href="CSS/styles.css" />
+
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
 <link rel="icon" href="/LinkedClubs/Images/LCbg.png" type="image/icon type">
@@ -17,6 +19,19 @@
 <title>LinkedClubs</title>
 
 <style>
+
+.main-bg-color {
+  background-color: #FF7556;
+}
+
+.main-color {
+  color: #FF7556;
+}
+
+.main-border-color {
+  border-color: #FF7556;
+}
+
 .place-holder-color::placeholder {
 	color: #FF7556;
 	opacity: 1;
@@ -61,7 +76,7 @@ main div:nth-of-type(2) img {
 
 	<header class="shadow-xl">
 		<nav class="flex lg:justify-between justify-center flex-wrap p-2">
-			<a href="#" class="px-10 py-6 text-3xl font-black text-gray-700">LinkedClubs</a>
+			<a href="" class="px-10 py-6 text-3xl font-black text-gray-700">LinkedClubs</a>
 			<ul class="px-10 md:py-6">
 				<li class="inline-block pr-3"><a
 					href="/LinkedClubs/clubs?clubId=" class="clubIds"> <img
@@ -112,7 +127,7 @@ main div:nth-of-type(2) img {
 			<section class="m-10">
 				<h2 class="text-xl font-bold text-gray-700">For Clubs</h2>
 				<p class="text-gray-500 py-6 mb-6">
-					<br><br><br><br>
+					Create your own space to<br>share your activities and<br>Events with great <br>students.<br>
 				</p>
 				<a href="/LinkedClubs/ClubLogin"
 					class="py-6 px-10 font-bold text-center shadow-lg border-2 main-border-color main-color">Login for club</a>

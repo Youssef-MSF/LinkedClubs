@@ -10,8 +10,21 @@
 
 <link rel="icon" href="/LinkedClubs/Images/LCbg.png" type="image/icon type">
 
-<link rel="stylesheet" href="/LinkedClubs/CSS/styles.css">
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <style>
+
+.main-bg-color {
+  background-color: #FF7556;
+}
+
+.main-color {
+  color: #FF7556;
+}
+
+.main-border-color {
+  border-color: #FF7556;
+}
+
 .place-holder-color::placeholder {
 	color: #FF7556;
 	opacity: 1;
