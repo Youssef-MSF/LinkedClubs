@@ -376,6 +376,17 @@
 										class="toggle-btn-update-post"
 										onclick="toggle_update_post(${ status.index })"></i>
 								</button></li>
+								
+								<li>
+								
+									<button data-id="${ post.id }">
+									
+										<i class="fas fa-trash-alt" style="font-size: 20px; color: red;"></i>
+									
+									</button>
+								
+								</li>
+								
 							<li name="numberLikes">${ post.likeNumber }</li>
 
 							<li><i class="fas fa-star"></i></li>
