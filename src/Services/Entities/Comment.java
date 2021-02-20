@@ -3,6 +3,7 @@ package Services.Entities;
 import java.util.Date;
 
 import javax.persistence.*;
+
 @Entity
 @Table(name="comment")
 public class Comment {

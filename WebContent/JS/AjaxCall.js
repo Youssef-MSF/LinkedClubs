@@ -6,6 +6,7 @@ const posts = document.querySelectorAll(".post");
 const sectionBtns = document.querySelectorAll(".likes__comments");
 const commentSections = document.querySelectorAll(".comments");
 const joinClubBtn = document.getElementById('joinBtn');
+const deletePostBtn =  document.getElementsByName("delete_post_btn");
 
 //Getting ticketBtn 
 const ticketBtns = document.querySelectorAll("button[name=ticketBtn]");
@@ -32,10 +33,10 @@ const ajaxCall = (path, callBackSuccess, callBackFailure, params) => {
     xhr.send(params);
     xhr.onload = () => {
         if (xhr.readyState == 4) {
-            console.log("responseXML", xhr.responseXML);
+            
             const messageTag = xhr.responseXML.getElementsByTagName("message")[0];
             const message = messageTag.childNodes[0].nodeValue;
-            console.log(message);
+            
             if (message == "success") {
                 //test on callBack sometimes we need it sometimes not
                 if (callBackSuccess != undefined) callBackSuccess();
@@ -180,6 +181,25 @@ const appendNotification=(btn,title,date)=>{
      notification.innerHTML=section+notification.innerHTML;
 };
 
+// Handle delete post function
+const deletePost = (event)=>{
+
+	const postId =  event.target.parentNode.getAttribute("data-id");
+
+	const path="http://localhost:8080/LinkedClubs/HandleDeletePost";
+	const params = "postId=" + postId;
+	
+	ajaxCall(path, ()=>removePostFromPage() , ()=>{alert("You can't delete a post that already had comments !")}, params);
+
+}
+
+// Remove post from page
+const removePostFromPage = ()=>{
+
+	currentPost.remove();
+
+}
+
 //Event listeners
 likesBtns.forEach(Element => {
     Element.addEventListener("click", (event) => like(event));
@@ -210,6 +230,9 @@ refuseBtns.forEach(Element => {
 });
 ticketBtns.forEach(Element => {
     Element.addEventListener("click", (event) => addNotification(event));
+});
+deletePostBtn.forEach(Element => {
+    Element.addEventListener("click", (event) => deletePost(event));
 });
 
 joinClubBtn.addEventListener("click", (event) => joinClub(event));

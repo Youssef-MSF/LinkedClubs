@@ -23,7 +23,7 @@ public class Post {
 	private int likeNumber;
 	private int commentNumber;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Notification notification;
 	
 	// Constructors

@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
 			const aTags = document.getElementsByClassName("clubIds");
 			
 			for (let i = 0; i < 4; i++) {
-				console.log(request.responseXML.getElementsByTagName("clubId")[i].childNodes[0].nodeValue);
 				imgTags[i].src += request.responseXML.getElementsByTagName("image")[i].childNodes[0].nodeValue;
 				aTags[i].href += request.responseXML.getElementsByTagName("clubId")[i].childNodes[0].nodeValue;
 			}

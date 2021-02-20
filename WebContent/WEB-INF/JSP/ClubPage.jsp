@@ -219,18 +219,22 @@
 								src="/LinkedClubs/Images/postFiles/<c:out value="${post.fileLink}"/>" />
 
 						</c:if>
+						
+						<c:if test="${ post.fileType.contains('video') }">
+
+							<video class="current_post_file"
+								style="width: 100%; height: auto;" controls>
+
+								<source src="/LinkedClubs/Images/postFiles/<c:out value="${post.fileLink}"/>" type="${post.fileType}" >
+								
+							</video>
+
+						</c:if>
 
 					</c:if>
 
 					<header class="likes__comments">
 						<div>
-
-							<button name="likesBtn"
-								data-isLiked="${ likedPosts.contains(post.id) }"
-								<c:if test="${ likedPosts.contains(post.id) }">style="color:#FF7556;"</c:if>
-								data-id="${ post.id }">
-								<i class="fas fa-star"></i> like
-							</button>
 
 							<button name="commentsBtn">
 								<i class="fas fa-comment-alt"></i> comment

@@ -13,4 +13,5 @@ public interface DaoPost {
 	public Post updateCommentNumber(Post post); // Update comment number of a post
 	public Post updateNotification(Post post); // Update notification of a post
 	public ArrayList<Post> getAllPosts(); // getAll posts
+	public Post delete(Post post); // Delete post
 }

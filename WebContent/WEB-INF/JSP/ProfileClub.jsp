@@ -150,11 +150,7 @@
 
 			<div style="display: flex; width: 100%;">
 
-				<div id="img_update">
-
-					
-
-				</div>
+				<div id="img_update"></div>
 
 				<div id="img_btn">
 
@@ -376,17 +372,18 @@
 										class="toggle-btn-update-post"
 										onclick="toggle_update_post(${ status.index })"></i>
 								</button></li>
-								
-								<li>
-								
-									<button data-id="${ post.id }">
-									
-										<i class="fas fa-trash-alt" style="font-size: 20px; color: red;"></i>
-									
-									</button>
-								
-								</li>
-								
+
+							<li>
+
+								<button name="delete_post_btn" data-id="${ post.id }">
+
+									<i class="fas fa-trash-alt"
+										style="font-size: 20px; color: red;"></i>
+
+								</button>
+
+							</li>
+
 							<li name="numberLikes">${ post.likeNumber }</li>
 
 							<li><i class="fas fa-star"></i></li>
@@ -412,6 +409,17 @@
 							<embed class="current_post_file"
 								style="width: 100%; height: 30em;"
 								src="/LinkedClubs/Images/postFiles/<c:out value="${post.fileLink}"/>" />
+
+						</c:if>
+
+						<c:if test="${ post.fileType.contains('video') }">
+
+							<video class="current_post_file"
+								style="width: 100%; height: auto;" controls>
+
+								<source src="/LinkedClubs/Images/postFiles/<c:out value="${post.fileLink}"/>" type="${post.fileType}" >
+								
+							</video>
 
 						</c:if>
 

@@ -11,9 +11,9 @@
 		</c:if>
 
 		<button>
-			<input type="text" placeholder="search"> <i
-				class="fab fa-searchengin"></i>
+			<a href="pubchat"><i class="fas fa-comments"></i> Chat Room</a>
 		</button>
+		
 		<c:if test="${ sessionScope.student != null }">
 			<div>
 				<button id="notificationBtn">

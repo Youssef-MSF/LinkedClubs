@@ -117,6 +117,17 @@
 								src="/LinkedClubs/Images/postFiles/<c:out value="${post.fileLink}"/>" />
 
 						</c:if>
+						
+						<c:if test="${ post.fileType.contains('video') }">
+
+							<video class="current_post_file"
+								style="width: 100%; height: auto;" controls>
+
+								<source src="/LinkedClubs/Images/postFiles/<c:out value="${post.fileLink}"/>" type="${post.fileType}" >
+								
+							</video>
+
+						</c:if>
 
 					</c:if>
 

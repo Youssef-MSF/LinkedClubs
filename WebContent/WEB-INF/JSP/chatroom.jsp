@@ -39,12 +39,70 @@
 }
 </style>
 <title>Public Chat</title>
+<link rel="icon" href="/LinkedClubs/Images/LCbg.png" type="image/icon type">
+<link rel="stylesheet" type="text/css"
+	href="/LinkedClubs/CSS/NavBar.css" media="screen" />
 </head>
 
 <body>
 
+	<nav id="navBar">
+	<main>
+		<c:if test="${ sessionScope.student != null }">
+			<a href="home">LinkedClubs</a>
+		</c:if>
+
+		<c:if test="${ sessionScope.student == null }">
+			<a href="./">LinkedClubs</a>
+		</c:if>
+
+		<button>
+			<a href="pubchat"><i class="fas fa-comments"></i> Chat Room</a>
+		</button>
+		
+		<c:if test="${ sessionScope.student != null }">
+			<div>
+				<button id="notificationBtn">
+					<i class="fas fa-sticky-note"></i>
+				</button>
+				<span id="nbrReminder">${ nbrReminders }</span>
+				<button id="notifyBtn">
+					<i class="fas fa-bell"></i>
+				</button>
+				<span id="nbrNotificattion">${ nbrNotifications }</span> <img style="width: 60px; height: 60px;"
+					src="/LinkedClubs/Images/profileImages/<c:out value="${sessionScope.student.profileImage}"/>"
+					alt="profile picture"> <a href="profile"><span
+					id="fullName"><c:out
+							value="${sessionScope.student.fullName}" /></span></a>
+
+				<form action="Logout" method="post">
+
+					<button id="logout_btn" type="submit"
+						style="color: white; display: block; margin-left: 20px;">
+						<i class="fas fa-sign-out-alt"></i>
+					</button>
+
+				</form>
+
+			</div>
+		</c:if>
+
+		<c:if test="${ sessionScope.student == null }">
+			<div>
+				<img
+					src="/LinkedClubs/Images/clubProfileImages/<c:out value="${club.image}"/>"
+					alt="profile picture"> <span id="fullName"><c:out
+						value="${club.clubName}" /></span>
+
+
+			</div>
+		</c:if>
+
+	</main>
+</nav>
+
 	<div class="flex justify-center">
-		<main class="w-full lg:w-3/4 h-full lg:m-6">
+		<main class="w-full lg:w-3/4 h-full lg:m-6 lg:mt-16 mt-16" style="box-shadow: 10px 10px 10px 10px gray;">
 			<header class="flex justify-between main-bg-color pb-10 px-2 pt-2">
 				<div class="flex mt-4">
 					<img src="appsclub.jpeg" class="rounded-full w-9 h-9 mx-2" />
@@ -74,8 +132,8 @@
 			<section class="">
 				<form onsubmit="return false;" class=" flex">
 					<input type="text" placeholder="what's on your mind?"
-						class="w-10/12 h-full p-3 place-holder-color" id="message" />
-					<button type="submit" class=" mt-3 w-2/12 h-full main-color"
+						class="w-10/12 h-full p-3 place-holder-color outline-none" id="message" />
+					<button type="submit" style="outline: none;" class=" mt-3 w-2/12 h-full main-color"
 						id="send-message-btn">
 						<i class="fas fa-paper-plane text-2xl"></i>
 					</button>
