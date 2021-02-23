@@ -23,7 +23,7 @@
 
 <title>Profile</title>
 
-<link rel="icon" href="/LinkedClubs/Images/LCbg.png" type="image/icon type">
+<link rel="icon" href="/LinkedClubs/Images/fav.png" type="image/icon type">
 
 </head>
 <body>

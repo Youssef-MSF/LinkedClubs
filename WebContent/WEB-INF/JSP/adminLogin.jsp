@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/LinkedClubs/CSS/Login.css">
     <title>Login</title>
     
-    <link rel="icon" href="/LinkedClubs/Images/LCbg.png" type="image/icon type">
+    <link rel="icon" href="/LinkedClubs/Images/fav.png" type="image/icon type">
     
 </head>
 

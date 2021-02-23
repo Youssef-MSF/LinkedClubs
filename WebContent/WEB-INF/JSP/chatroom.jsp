@@ -16,6 +16,7 @@
 	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
 	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
 	crossorigin="anonymous" />
+	<link rel="icon" href="/LinkedClubs/Images/fav.png" type="image/icon type">
 <style>
 .place-holder-color::placeholder {
 	color: #FF7556;
@@ -101,11 +102,13 @@
 	</main>
 </nav>
 
+<br>
+
 	<div class="flex justify-center">
 		<main class="w-full lg:w-3/4 h-full lg:m-6 lg:mt-16 mt-16" style="box-shadow: 10px 10px 10px 10px gray;">
 			<header class="flex justify-between main-bg-color pb-10 px-2 pt-2">
 				<div class="flex mt-4">
-					<img src="appsclub.jpeg" class="rounded-full w-9 h-9 mx-2" />
+					<img src="/LinkedClubs/Images/LCbg.jpeg" class="rounded-full w-9 h-9 mx-2" />
 					<p class="text-white">
 						Public Chat, Talk With Friends <br> <span
 							class="text-sm text-gray-200">Share Your Ideas</span>

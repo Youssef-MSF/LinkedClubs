@@ -16,7 +16,7 @@
 	href="/LinkedClubs/CSS/NavBar.css" media="screen" />
 <title>Home</title>
 
-<link rel="icon" href="/LinkedClubs/Images/LCbg.png" type="image/icon type">
+<link rel="icon" href="/LinkedClubs/Images/fav.png" type="image/icon type">
 
 </head>
 <body>

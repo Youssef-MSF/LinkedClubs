@@ -36,6 +36,9 @@ public class AdminVerification {
 		Club club = new Club();
 		verifyClubId(clubName, club);
 		verifyClubPassowrd(password, confirmation, club);
+		
+		club.setImage("profileImageDefaultClub.jpg");
+		club.setCoverImage("clubCiverDefault.jpg");
 
 		if (err.isEmpty()) {
 

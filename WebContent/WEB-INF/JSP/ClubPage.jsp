@@ -22,7 +22,7 @@
 
 <title>Profile Club</title>
 
-<link rel="icon" href="/LinkedClubs/Images/LCbg.png" type="image/icon type">
+<link rel="icon" href="/LinkedClubs/Images/fav.png" type="image/icon type">
 
 </head>
 <body>
@@ -235,6 +235,17 @@
 
 					<header class="likes__comments">
 						<div>
+						
+						<c:if test="${ sessionScope.student != null }">
+						
+							<button name="likesBtn"
+								data-isLiked="${ likedPosts.contains(post.id) }"
+								<c:if test="${ likedPosts.contains(post.id) }">style="color:#FF7556;"</c:if>
+								data-id="${ post.id }">
+								<i class="fas fa-star"></i> like
+							</button>
+
+						</c:if>
 
 							<button name="commentsBtn">
 								<i class="fas fa-comment-alt"></i> comment
@@ -295,7 +306,7 @@
 					<div class="content">
 						<h3>Club Name :</h3>
 						<h2
-							style="padding-right: 50px; font-family: cursive; color: rgb(55, 55, 56);">
+							style="padding-right: 50px; text-align: center; font-family: cursive; color: rgb(55, 55, 56);">
 							<i>${ club.clubName }</i>
 						</h2>
 					</div>
@@ -306,8 +317,7 @@
 					</div>
 					<br />
 					<div class="content">
-						<h3>Members :</h3>
-						<h2 style="padding-top: 5px;">${ club.membersNumber }</h2>
+						<h3>Members : ${ club.membersNumber }</h3>
 					</div>
 				</div>
 

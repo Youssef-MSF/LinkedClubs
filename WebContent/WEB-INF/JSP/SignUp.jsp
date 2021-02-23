@@ -9,13 +9,27 @@
     <link rel="stylesheet" href="/LinkedClubs/CSS/signup_styling.css">
     <title>Sign up</title>
     
-    <link rel="icon" href="/LinkedClubs/Images/LCbg.png"
-	type="image/icon type">
+    <link rel="icon" href="/LinkedClubs/Images/fav.png" type="image/icon type">
+    
+    <link rel="stylesheet" type="text/css"
+	href="/LinkedClubs/CSS/NavBar.css" media="screen" />
     
 </head>
 
 <body>
 
+	<nav id="navBar">
+		<main style="height: 70px; font-size: 20px;">
+			<a href="/LinkedClubs">LinkedClubs</a>
+			
+
+			<a href="Login">Login</a>
+			
+			<a href="Signup">Sign up</a>
+
+		</main>
+	</nav>
+	<br>
     <h1>Register for LinkedClubs</h1>
 
     <form action="/LinkedClubs/Signup" method="post">

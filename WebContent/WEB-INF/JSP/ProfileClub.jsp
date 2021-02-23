@@ -23,8 +23,7 @@
 
 <title>Profile Club</title>
 
-<link rel="icon" href="/LinkedClubs/Images/LCbg.png"
-	type="image/icon type">
+<link rel="icon" href="/LinkedClubs/Images/fav.png" type="image/icon type">
 
 <style>
 #create_post_form {
@@ -119,10 +118,7 @@
 	<nav id="navBar">
 		<main>
 			<a href="/LinkedClubs">LinkedClubs</a>
-			<button>
-				<input type="text" placeholder="search"> <i
-					class="fab fa-searchengin"></i>
-			</button>
+
 			<div>
 				<img
 					src="/LinkedClubs/Images/clubProfileImages/<c:out value="${sessionScope.club.image}"/>"
@@ -417,8 +413,10 @@
 							<video class="current_post_file"
 								style="width: 100%; height: auto;" controls>
 
-								<source src="/LinkedClubs/Images/postFiles/<c:out value="${post.fileLink}"/>" type="${post.fileType}" >
-								
+								<source
+									src="/LinkedClubs/Images/postFiles/<c:out value="${post.fileLink}"/>"
+									type="${post.fileType}">
+
 							</video>
 
 						</c:if>
@@ -520,7 +518,7 @@
 					<div class="content">
 						<h3>Club Name :</h3>
 						<h2
-							style="padding-right: 50px; font-family: cursive; color: rgb(55, 55, 56);">
+							style="padding-right: 50px; font-family: cursive; text-align: center; color: rgb(55, 55, 56);">
 							<i>${ club.clubName }</i>
 						</h2>
 					</div>
@@ -531,8 +529,8 @@
 					</div>
 					<br />
 					<div class="content">
-						<h3>Members :</h3>
-						<h2 style="padding-top: 5px;">${ club.membersNumber }</h2>
+						<h3>Members : ${ club.membersNumber }</h3>
+
 					</div>
 				</div>
 
@@ -671,6 +669,12 @@
 			if(post_fileType[index].value.includes('image')){
 				
 				document.getElementById('img_update').innerHTML = '<img src=' + post_files[index].src + ' width="100px" height="100px" >'
+				
+			}
+			
+			if(post_fileType[index].value.includes('video')){
+				
+				document.getElementById('img_update').innerHTML = '<video controls> <source src=' + post_files[index].src + '> </video>'
 				
 			}
 		

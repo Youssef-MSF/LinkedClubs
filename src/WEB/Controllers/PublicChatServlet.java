@@ -58,7 +58,7 @@ public class PublicChatServlet extends HttpServlet {
 			// TODO Auto-generated method stub
 			request.getServletContext().getRequestDispatcher("/WEB-INF/JSP/chatroom.jsp").forward(request, response);
 		}else {
-			response.sendRedirect("/LinkedClubs");
+			response.sendRedirect("/LinkedClubs/Login");
 		}
 	}
 

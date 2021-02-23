@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Administration</title>
 
-<link rel="icon" href="/LinkedClubs/Images/LCbg.png" type="image/icon type">
+<link rel="icon" href="/LinkedClubs/Images/fav.png" type="image/icon type">
 
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <style>
