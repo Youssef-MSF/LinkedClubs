@@ -37,10 +37,10 @@
             <h3 class="err">${err.get("errLogin")}</h3>
             <span></span>
             <label for="">Type your CNE:</label>
-            <input type="text" name="cne" id="cne" placeholder="Insert your CNE">
+            <input type="text" name="cne" id="cne" placeholder="Insert your CNE" required>
             <span class="err">${err.get("errCNE")}</span>
             <label for="">Password:</label>
-            <input type="password" name="password" placeholder="Insert your password">
+            <input type="password" name="password" placeholder="Insert your password" required>
             <span class="err">${err.get("errPassword")}</span>
             <button type="submit" value="Submit">Submit</button>
             

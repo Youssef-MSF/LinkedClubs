@@ -16,7 +16,7 @@
     
 </head>
 
-<body>
+<body style="margin: 0; height: 60em;">
 
 	<nav id="navBar">
 		<main style="height: 70px; font-size: 20px;">

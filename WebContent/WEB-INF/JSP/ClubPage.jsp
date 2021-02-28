@@ -45,7 +45,7 @@
 				</ul>
 				<c:if test="${ sessionScope.student != null }">
 					<c:if test="${ !joinedClubs.contains(club.clubId) }">
-						<button id="joinBtn" data-clubId="${ club.clubId }">Join
+						<button id="joinBtn" data-email="${ sessionScope.student.email }" data-club="${ club.clubName }" data-clubId="${ club.clubId }">Join
 							Club</button>
 					</c:if>
 

@@ -37,10 +37,10 @@
             <h2 style="color: red;">${err.get("errLogin")}</h2>
             <span></span>
             <label for="">Club ID :</label>
-            <input type="text" name="clubId" id="cne" placeholder="Insert your CNE">
+            <input type="text" name="clubId" id="cne" placeholder="Insert the club ID" required>
             <span class="err">${err.get("errCNE")}</span>
             <label for="">Password:</label>
-            <input type="password" name="password" placeholder="Insert your password">
+            <input type="password" name="password" placeholder="Insert your password" required>
             <span class="err">${err.get("errPassword")}</span>
             <button type="submit" value="Submit">Enter</button>
             

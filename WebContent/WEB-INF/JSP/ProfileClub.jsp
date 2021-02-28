@@ -363,7 +363,7 @@
 						</div>
 
 						<div>
-							<li><button>
+							<li><button style="width: 0px; padding: 0px 10px;">
 									<i class="fas fa-cog" style="font-size: 20px;"
 										class="toggle-btn-update-post"
 										onclick="toggle_update_post(${ status.index })"></i>
@@ -371,18 +371,18 @@
 
 							<li>
 
-								<button name="delete_post_btn" data-id="${ post.id }">
+								<button style="width: 0px; padding: 0px 10px;" name="delete_post_btn" data-id="${ post.id }">
 
 									<i class="fas fa-trash-alt"
-										style="font-size: 20px; color: red;"></i>
+										style="font-size: 20px;"></i>
 
 								</button>
 
 							</li>
 
-							<li name="numberLikes">${ post.likeNumber }</li>
+							<li name="numberLikes" style="font-size: 20px; padding-left: 15px;">${ post.likeNumber }</li>
 
-							<li><i class="fas fa-star"></i></li>
+							<li><i class="fas fa-star" style="font-size: 20px;"></i></li>
 						</div>
 
 						<input type="text" value="${ post.id }" class="current_post_id"
@@ -485,9 +485,9 @@
 
 					<form action="">
 						<input name="accept" type="button" value="Accept" class="btn1"
-							data-studentId="${member.CNE}" /> <input name="decline"
+							data-studentId="${member.CNE}" data-club="${ sessionScope.club.clubName }" data-email="${ member.email }" /> <input name="decline"
 							type="button" value="Decline" class="btn2"
-							data-studentId="${member.CNE}" />
+							data-studentId="${member.CNE}" data-club="${ sessionScope.club.clubName }" data-email="${ member.email }" />
 					</form>
 
 				</div>

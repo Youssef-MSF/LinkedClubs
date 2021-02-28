@@ -110,6 +110,13 @@ const joinClub = (event) => {
  const path = "http://localhost:8080/LinkedClubs/HandleJoinClub";
  const params = "clubId=" + clubId;
  ajaxCall(path, () => changeJoinStatus(), undefined, params);
+ 
+ // Send request to send email
+ const email = joinBtn.getAttribute("data-email");
+ const club = joinBtn.getAttribute("data-club");
+ const xhr = new XMLHttpRequest();
+ xhr.open("GET", "http://127.0.0.1:8000/sendwelcomemail/?rec="+email+"&message=Youe request to join the club : " + club + " has been sent successfully. You'll get the response soon.");
+ xhr.send();
 };
 
 // changeJoinStatus function
@@ -142,17 +149,35 @@ const changeLikeBtn = (btn, color, isTrue) => {
 const acceptRefuse=(event)=>{
 	const studentId=event.target.getAttribute("data-studentId");
 	const clickedBtn=event.target.getAttribute("name");
+	
+	// Parameters to send mails
+	const email = event.target.getAttribute("data-email");
+ 	const club = event.target.getAttribute("data-club");
+	
 	const path="http://localhost:8080/LinkedClubs/HandleMembers";
 	const params="cne="+studentId + "&btnClicked="+clickedBtn;
-	ajaxCall(path, () => accept(), ()=>refuse(), params);
+	ajaxCall(path, () => accept(email, club), ()=>refuse(email, club), params);
+	
 };
-const accept=()=>{
+const accept=(email, club)=>{
 	const h4=currentCard.querySelector("h4");
 	h4.textContent="Payed : true";
+	
+	// Send request to send email
+ 	
+ 	const xhr = new XMLHttpRequest();
+ 	xhr.open("GET", "http://127.0.0.1:8000/sendwelcomemail/?rec="+email+"&message=Congratulations. You request to join the club : " + club + " has been accepted, from now on you are a member of the club. Welcome !!");
+ 	xhr.send();
 };
-const refuse=()=>{
+const refuse=(email, club)=>{
 	const container=document.getElementById("grid__container");
 	container.removeChild(currentCard);
+	
+	// Send request to send email
+	
+ 	const xhr = new XMLHttpRequest();
+ 	xhr.open("GET", "http://127.0.0.1:8000/sendwelcomemail/?rec="+email+"&message=Hello. You request to join the club : " + club + " has been declined, Try to contact the club !");
+ 	xhr.send();
 };
 
 //Handle notification

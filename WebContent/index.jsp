@@ -72,7 +72,6 @@ main div:nth-of-type(2) img {
 </head>
 <body>
 
-	<script defer src="/LinkedClubs/JS/getClubs.js"></script>
 
 	<c:import url="./WEB-INF/JSP/chatbot.jsp" />
 
